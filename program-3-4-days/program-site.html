@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Runner Strength Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#ECEFF2; --surface:#FFFFFF; --stage:#F4F6F8; --ink:#141A21; --muted:#5A6572;
+  --far:#AEB6C0; --line:#D5DBE2; --prop:#8A95A1; --accent:#1F56C8; --accent-soft:#E2EAFA;
+  --hard:#C4322A; --plate-edge:#141A21;
+  --p-legs:#D0362C; --p-hinge:#2358C9; --p-plyo:#E2AC00; --p-pull:#2F8F4E;
+  --p-push:#FFFFFF; --p-core:#1A1D21; --p-prep:#8A929C;
+  --map-base:#E3E7EC; --map-off:#CBD2DA; --map-1:#A9C0EE; --map-2:#1F56C8;
+  --cov-1:#EEF3FC; --cov-2:#D6E2F8; --cov-3:#B5CBF2;
+  color-scheme:light dark;
+}
+:root[data-theme="light"]{color-scheme:light}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1216; --surface:#161B21; --stage:#1B2128; --ink:#E6EAEE; --muted:#9AA5B1;
+    --far:#7B8794; --line:#2A323B; --prop:#8894A1; --accent:#7AA3FF; --accent-soft:#1C2940;
+    --hard:#F06A5F; --plate-edge:#A8B2BD;
+    --p-legs:#E0493E; --p-hinge:#4C7FE6; --p-plyo:#E8B415; --p-pull:#3FAA62;
+    --p-push:#F4F6F8; --p-core:#050607; --p-prep:#7D8793;
+    --map-base:#232A32; --map-off:#36404B; --map-1:#2F4A7E; --map-2:#7AA3FF;
+    --cov-1:#172033; --cov-2:#1F3052; --cov-3:#2A4574;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1216; --surface:#161B21; --stage:#1B2128; --ink:#E6EAEE; --muted:#9AA5B1;
+  --far:#7B8794; --line:#2A323B; --prop:#8894A1; --accent:#7AA3FF; --accent-soft:#1C2940;
+  --hard:#F06A5F; --plate-edge:#A8B2BD;
+  --p-legs:#E0493E; --p-hinge:#4C7FE6; --p-plyo:#E8B415; --p-pull:#3FAA62;
+  --p-push:#F4F6F8; --p-core:#050607; --p-prep:#7D8793;
+    --map-base:#232A32; --map-off:#36404B; --map-1:#2F4A7E; --map-2:#7AA3FF;
+    --cov-1:#172033; --cov-2:#1F3052; --cov-3:#2A4574;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 "Barlow",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 72px;display:flex;flex-direction:column;gap:28px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace}
+.eyebrow{font:600 11.5px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;text-wrap:balance;margin:0}
+h1{font-weight:700;font-size:clamp(38px,6.4vw,60px);line-height:.92;text-transform:uppercase;letter-spacing:.005em}
+h2{font-weight:700;font-size:clamp(30px,4.4vw,40px);line-height:1;text-transform:uppercase}
+h3{font-weight:600;font-size:22px;line-height:1.08}
+
+.top{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:flex-end;justify-content:space-between}
+.top .intro{display:flex;flex-direction:column;gap:10px;max-width:62ch}
+.lede{margin:0;color:var(--muted)}
+.modebox{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.seg button{font:600 17px/1 "Barlow Condensed",sans-serif;letter-spacing:.03em;text-transform:uppercase;border:0;background:transparent;color:var(--muted);padding:11px 18px;border-radius:8px;cursor:pointer}
+.seg button span{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:0;text-transform:none;margin-left:6px;opacity:.75}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+button:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.weekwrap{display:flex;flex-direction:column;gap:10px}
+.weekhead{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 12px/1 "IBM Plex Mono",monospace;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.scroller{overflow-x:auto;margin-inline:-4px;padding:4px}
+.week{display:grid;grid-template-columns:repeat(7,minmax(104px,1fr));gap:6px}
+.dcell{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:104px}
+.dcell .dn{font:600 11.5px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dcell .gym{font:600 17px/1.05 "Barlow Condensed",sans-serif;text-transform:uppercase;text-align:left;border:1px solid var(--line);background:var(--stage);color:var(--ink);border-radius:7px;padding:7px 8px;cursor:pointer}
+.dcell .gym[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.dcell .gym small{display:block;font:500 12.5px/1.2 "Barlow",sans-serif;text-transform:none;color:var(--muted);margin-top:2px}
+.dcell .cardio{font-size:13.5px;line-height:1.3;color:var(--muted)}
+.dcell .cardio.hard{color:var(--hard);font-weight:600}
+.dcell.rest .cardio{color:var(--muted)}
+.rule48{margin:0;font-size:13.5px;color:var(--muted)}
+
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto}
+.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;padding:9px 14px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.tabs button b{font:600 18px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.tabs button small{font:500 11.5px/1 "IBM Plex Mono",monospace;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button[aria-selected="true"] small{color:var(--bg);opacity:.7}
+
+.dayhead{display:flex;flex-direction:column;gap:6px}
+.dayhead p{margin:0;color:var(--muted);max-width:65ch}
+.block{display:flex;flex-direction:column;gap:12px}
+.blockhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.blockhead h3{font-size:20px;text-transform:uppercase;letter-spacing:.03em}
+.blockhead span{font:500 12.5px/1 "IBM Plex Mono",monospace;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.grid.warm{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+@media (max-width:400px){.grid,.grid.warm{grid-template-columns:1fr}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.stage{position:relative;background:var(--stage);border-bottom:1px solid var(--line)}
+.stage canvas{display:block;width:100%;aspect-ratio:13/10;cursor:pointer}
+.pp{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;padding:0}
+.pp svg{width:12px;height:12px;fill:currentColor}
+.cb{padding:14px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.hd{display:flex;align-items:baseline;gap:10px}
+.num{font:600 13px/1 "IBM Plex Mono",monospace;color:var(--muted);flex:0 0 auto}
+.opt{margin-left:auto;flex:0 0 auto;font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:4px 6px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.rx{font:600 16px/1.2 "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.tag{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.plate{--pc:var(--p-prep);width:13px;height:13px;border-radius:50%;flex:0 0 auto;background:radial-gradient(circle,var(--surface) 0 1.8px,var(--pc) 2.4px);border:1.5px solid var(--plate-edge);display:inline-block}
+.note{margin:0;font-weight:500}
+.cue{margin:0;color:var(--muted);font-size:14.5px}
+.alts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px;align-items:center}
+.alts .lbl{font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.chip{font:500 13.5px/1.2 "Barlow",sans-serif;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}
+.chip:hover{border-color:var(--prop)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.card.sm .cb{padding:12px 14px 14px;gap:6px}
+.card.sm h3{font-size:19px}
+.card.sm .rx{font-size:14px}
+.card.sm .cue{font-size:13.5px}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.rule{border-top:2px solid var(--ink);padding-top:10px;display:flex;flex-direction:column;gap:4px}
+.rule b{font:600 18px/1.1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.rule p{margin:0;color:var(--muted);font-size:14.5px}
+
+[hidden]{display:none!important}
+.mapwrap{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:18px 32px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+@media (max-width:700px){.mapwrap{grid-template-columns:1fr;padding:14px}.bodymap{max-width:330px;width:100%;margin-inline:auto}}
+.bodymap svg{display:block;width:100%;height:auto}
+.sil{fill:var(--map-base)}
+.sil line{stroke:var(--map-base);stroke-linecap:round}
+.rg{fill:var(--map-off);stroke:var(--surface);stroke-width:.8;transition:fill .2s}
+.rg[data-lv="1"]{fill:var(--map-1);cursor:pointer}
+.rg[data-lv="2"]{fill:var(--map-2);cursor:pointer}
+.rg.hl{stroke:var(--ink);stroke-width:1.6}
+.maplbl{font:600 7px "IBM Plex Mono",monospace;letter-spacing:.1em;fill:var(--muted)}
+.maplist{display:flex;flex-direction:column;gap:10px}
+.rchips{display:flex;flex-wrap:wrap;gap:6px}
+.rchip{font:600 15px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.03em;border:1px solid var(--map-2);background:var(--accent-soft);color:var(--ink);border-radius:7px;padding:7px 10px;cursor:pointer}
+.rchip:hover{background:var(--map-1)}
+.alsol{margin:0;color:var(--muted);font-size:14.5px}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 12px/1 "IBM Plex Mono",monospace;color:var(--muted);margin-top:4px}
+.maplegend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.l2{background:var(--map-2)}.sw.l1{background:var(--map-1)}.sw.l0{background:var(--map-off)}
+
+.parts{display:flex;flex-direction:column;gap:32px}
+.part{display:flex;flex-direction:column;gap:12px;scroll-margin-top:84px}
+.parthead{display:flex;flex-direction:column;gap:5px;border-left:4px solid var(--map-2);padding-left:12px}
+.parthead h3{font-size:26px;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+.why{margin:0;max-width:72ch}
+.alsoby{margin:0;font-size:13.5px;color:var(--muted)}
+.k{font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.focus{margin:0;font-size:14.5px}
+.hits{margin:0;font-size:13.5px;color:var(--muted)}
+.alts{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-top:auto;padding-top:6px}
+.alt{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:9px;padding:8px 11px;cursor:pointer;font:inherit}
+.alt b{font:600 14.5px/1.25 "Barlow",sans-serif}
+.alt em{font:500 10px/1 "IBM Plex Mono",monospace;font-style:normal;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-left:6px}
+.alt span{font-size:13.5px;line-height:1.35;color:var(--muted)}
+.alt:hover{border-color:var(--prop)}
+.alt[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.alt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.covnote{margin:0;color:var(--muted);font-size:14px;max-width:75ch}
+.covwrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.cov{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+.cov th,.cov td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+.cov thead th{font:600 11px/1.2 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cov thead th.cur{color:var(--accent)}
+.cov tbody th[scope=row]{text-align:left;font-weight:500}
+.cov tr.grp th{text-align:left;font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:12px;background:var(--stage)}
+.cov td b{font:600 14px "IBM Plex Mono",monospace}
+.cov td small{font:500 11.5px "IBM Plex Mono",monospace;color:var(--muted);margin-left:3px}
+.cov td .z{color:var(--muted);opacity:.5}
+.cov td[data-lv="1"]{background:var(--cov-1)}
+.cov td[data-lv="2"]{background:var(--cov-2)}
+.cov td[data-lv="3"]{background:var(--cov-3)}
+.cov td.wk,.cov th.wk{border-left:1px solid var(--line)}
+@media (max-width:520px){.cov th,.cov td{padding:6px 6px}.cov{font-size:13px}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="intro">
+      <span class="eyebrow">Strength for running · bodyweight options everywhere</span>
+      <h1>Runner Strength Plan</h1>
+      <p class="lede">Each session is laid out by body part. The map shows what a day hits, each section says why that part matters for running and cycling, and every exercise option says what it focuses on. Tap an option to swap it in and see how it moves.</p>
+    </div>
+    <div class="modebox">
+      <span class="eyebrow">Gym days per week</span>
+      <div class="seg" role="group" aria-label="Gym days per week">
+        <button type="button" id="m3" data-mode="3">3 days<span>A · Full · B</span></button>
+        <button type="button" id="m4" data-mode="4">4 days<span>A · B · A · B</span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="weekwrap" aria-label="Example week">
+    <div class="weekhead">
+      <span class="eyebrow">Example week with running &amp; cycling</span>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="scroller"><div class="week" id="week"></div></div>
+    <p class="rule48">Keep about 48 h between a heavy lower day and a hard or long run. Same day? Run in the morning, lift later.</p>
+  </section>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Sessions"></nav>
+
+  <section class="dayhead" id="dayhead"></section>
+
+  <section class="mapwrap" aria-label="Body parts trained in this session">
+    <div class="bodymap" id="bodymap"></div>
+    <div class="maplist" id="maplist"></div>
+  </section>
+
+  <section class="block" id="warmblock">
+    <div class="blockhead"><h3>Warm-up</h3><span>5–10 min</span></div>
+    <div class="grid warm" id="warm"></div>
+  </section>
+
+  <section class="block">
+    <div class="blockhead"><h3>Main work by body part</h3><span id="mainmeta"></span></div>
+    <div class="parts" id="parts"></div>
+  </section>
+
+  <section class="block">
+    <div class="blockhead"><h3>Weekly coverage</h3><span>hard sets per body part</span></div>
+    <p class="covnote"><b>Bold</b> = sets where that part is the main target. <b>+n</b> = sets where it works as a helper. Uses the options you picked, counts optional exercises, skips warm-ups.</p>
+    <div class="covwrap"><table class="cov" id="cov"></table></div>
+  </section>
+
+  <section class="block">
+    <div class="blockhead"><h3>How to run it</h3></div>
+    <div class="rules">
+      <div class="rule"><b>Effort</b><p>Finish most sets with 1–3 reps left. No grinding. Sessions take about 60–75 min; drop the optional items first.</p></div>
+      <div class="rule"><b>Progress</b><p>Top of the rep range on every set → add weight next time (+2.5 kg upper, +5 kg lower), or move to a harder variation.</p></div>
+      <div class="rule"><b>Plyos &amp; Nordics</b><p>Plyos are about quality: stop a set when contacts feel slow. Nordics: add at most one rep per week.</p></div>
+      <div class="rule"><b>Lighter weeks</b><p>Every 5th–6th week, or a race week: same exercises, about half the sets. In high-mileage blocks, 2–3 sets on lower days.</p></div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ---------- figure engine ---------- */
+const LEN={T:50,UA:29,FA:27,TH:42,SH:40,FT:12,NECK:15,HEAD:9};
+const FL=177.5, VB=[0,0,260,200], R=Math.PI/180, Z=[0,0];
+const KEYS=['hN','hF','fN','fF'];
+const dir=a=>[Math.sin(a*R),Math.cos(a*R)];
+const add=(p,q,k=1)=>[p[0]+q[0]*k,p[1]+q[1]*k];
+const lerp=(a,b,u)=>a+(b-a)*u;
+const lerp2=(p,q,u)=>[lerp(p[0],q[0],u),lerp(p[1],q[1],u)];
+function lerpAng(a,b,u){let d=b-a;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;return a+d*u}
+function body(ax,ay,t){const d=dir(t);return {hip:[ax+82*d[0],ay+82*d[1]],t}}
+
+function roots(hip,t,v){
+  const sh=add(hip,dir(t),LEN.T), o={hip,sh};
+  if(v==='front'){const p=[-Math.cos(t*R),Math.sin(t*R)];
+    o.shN=add(sh,p,13);o.shF=add(sh,p,-13);o.hipN=add(hip,p,8);o.hipF=add(hip,p,-8);}
+  else{o.shN=o.shF=sh;o.hipN=o.hipF=hip;}
+  return o;
+}
+const rootOf=(rt,k)=>k==='hN'?rt.shN:k==='hF'?rt.shF:k==='fN'?rt.hipN:rt.hipF;
+const lens=k=>k[0]==='h'?[LEN.UA,LEN.FA]:[LEN.TH,LEN.SH];
+function defBend(ex,k){
+  if(ex.b&&ex.b[k]!=null)return ex.b[k];
+  if(ex.v==='front')return k[1]==='N'?1:-1;
+  return k[0]==='h'?-1:1;
+}
+function specOf(ex,f,k){
+  if(f[k]!=null)return f[k];
+  const arm=k[0]==='h',near=k[1]==='N';
+  if(ex.v==='front')return arm?{a:near?[6,4]:[-6,-4]}:{r:[near?2:-2,81]};
+  return arm?{r:[3,53]}:{r:[0,81]};
+}
+function ik(root,tg,l1,l2,sign){
+  let dx=tg[0]-root[0],dy=tg[1]-root[1],d=Math.hypot(dx,dy);
+  if(d<1e-6){dx=0;dy=1;d=1}
+  const ux=dx/d,uy=dy/d,dd=Math.min(Math.max(d,Math.abs(l1-l2)+.01),l1+l2-.01);
+  const a=(l1*l1-l2*l2+dd*dd)/(2*dd),h=Math.sqrt(Math.max(0,l1*l1-a*a));
+  return [[root[0]+ux*a+sign*uy*h,root[1]+uy*a-sign*ux*h],[root[0]+ux*dd,root[1]+uy*dd]];
+}
+function resolve(ex,f){
+  const rt=roots(f.hip,f.t,ex.v),L={};
+  for(const k of KEYS){
+    const s=specOf(ex,f,k),[l1,l2]=lens(k),root=rootOf(rt,k);
+    const o={b:(!Array.isArray(s)&&s.b!=null)?s.b:defBend(ex,k)};
+    if(Array.isArray(s)){o.m='abs';o.p=s}
+    else if(s.a){o.m='fk';o.a=s.a;const e=add(root,dir(s.a[0]),l1);o.p=add(e,dir(s.a[1]),l2);
+      const v=[o.p[0]-root[0],o.p[1]-root[1]],w=[e[0]-root[0],e[1]-root[1]];o.b=(w[0]*v[1]-w[1]*v[0])>0?1:-1}
+    else if(s.h){o.m='rel';o.p=add(rt.hip,s.h)}
+    else{o.m='rel';o.p=add(root,s.r)}
+    const v=[o.p[0]-root[0],o.p[1]-root[1]];o.ang=Math.atan2(v[0],v[1]);o.dist=Math.hypot(v[0],v[1]);
+    L[k]=o;
+  }
+  return L;
+}
+function prep(ex){
+  if(ex._r)return ex;
+  let prev={};
+  ex._f=ex.f.map(fr=>{const m=Object.assign({},prev,fr);delete m.d;if(fr.d)m.d=fr.d;prev=m;return m});
+  ex._r=ex._f.map(f=>resolve(ex,f));
+  const n=ex._f.length,sp=ex.sp||.9,hold=ex.hold??.25;let order;
+  if(n===1)order=[0,0];
+  else if(ex.mode==='loop')order=[...Array(n).keys(),0];
+  else if(ex.mode==='cut')order=[...Array(n).keys()];
+  else{order=[...Array(n).keys()];for(let i=n-2;i>=0;i--)order.push(i)}
+  ex._segs=[];
+  for(let i=0;i<order.length-1;i++){const b=order[i+1];ex._segs.push({a:order[i],b,hold,dur:ex._f[b].d||sp})}
+  if(ex.mode==='cut')ex._segs.push({a:n-1,b:n-1,hold:.8,dur:0});
+  ex._total=ex._segs.reduce((s,g)=>s+g.hold+g.dur,0)||1;
+  const s0=ex._segs[0];ex._still=s0.hold+s0.dur+.01;
+  return ex;
+}
+function pose(ex,i,j,u){
+  const fa=ex._f[i],fb=ex._f[j],A=ex._r[i],B=ex._r[j];
+  const hip=lerp2(fa.hip,fb.hip,u),t=lerp(fa.t,fb.t,u),rt=roots(hip,t,ex.v);
+  const o=lerp2(fa.o||Z,fb.o||Z,u),S=p=>[p[0]+o[0],p[1]+o[1]];
+  const J={t,hip:S(rt.hip),sh:S(rt.sh),shN:S(rt.shN),shF:S(rt.shF),hipN:S(rt.hipN),hipF:S(rt.hipF)};
+  J.head=S(add(rt.sh,dir(t),LEN.NECK));
+  for(const k of KEYS){
+    const la=A[k],lb=B[k],[l1,l2]=lens(k),root=rootOf(rt,k);let m,e;
+    if(la.m==='fk'&&lb.m==='fk'){m=add(root,dir(lerp(la.a[0],lb.a[0],u)),l1);e=add(m,dir(lerp(la.a[1],lb.a[1],u)),l2)}
+    else{let tg;
+      if(la.m!=='abs'&&lb.m!=='abs'){const an=lerpAng(la.ang,lb.ang,u),d=lerp(la.dist,lb.dist,u);tg=[root[0]+Math.sin(an)*d,root[1]+Math.cos(an)*d]}
+      else tg=lerp2(la.p,lb.p,u);
+      [m,e]=ik(root,tg,l1,l2,u<.5?la.b:lb.b)}
+    const sd=k[1],dft=ex.v==='front'?(sd==='N'?90:-90):90;
+    J[k]={r:S(root),m:S(m),e:S(e),ft:k[0]==='f'?lerp(fa['ft'+sd]??dft,fb['ft'+sd]??dft,u):null};
+  }
+  return J;
+}
+const ease=u=>.5-.5*Math.cos(Math.PI*u);
+function sample(ex,tm){
+  let x=((tm%ex._total)+ex._total)%ex._total;
+  for(const g of ex._segs){
+    if(x<g.hold)return pose(ex,g.a,g.a,0);x-=g.hold;
+    if(x<g.dur)return pose(ex,g.a,g.b,ex.mode==='loop'?x/g.dur:ease(x/g.dur));x-=g.dur;
+  }
+  const g=ex._segs[ex._segs.length-1];return pose(ex,g.b,g.b,0);
+}
+
+/* ---------- drawing ---------- */
+let C={};
+const TOK=['ink','far','prop','line','stage','accent','plate-edge','p-legs','p-hinge','p-plyo','p-pull','p-push','p-core','p-prep'];
+function readColors(){const s=getComputedStyle(document.documentElement);for(const k of TOK)C[k]=s.getPropertyValue('--'+k).trim()}
+function jp(J,n){
+  switch(n){case 'hN':return J.hN.e;case 'hF':return J.hF.e;case 'aN':return J.fN.e;case 'aF':return J.fF.e;
+    case 'kN':return J.fN.m;case 'kF':return J.fF.m;case 'eN':return J.hN.m;case 'eF':return J.hF.m;
+    case 'sh':return J.sh;case 'hip':return J.hip;default:return J.head}
+}
+function ln(ctx,a,b,w,col){ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke()}
+function circ(ctx,p,r,fill,stroke,sw){ctx.beginPath();ctx.arc(p[0],p[1],r,0,Math.PI*2);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=sw||1.5;ctx.stroke()}}
+function drawProp(ctx,p,J,ex,vw){
+  switch(p.k){
+    case 'wall':ln(ctx,[p.x,vw.y0],[p.x,FL],4,C.prop);break;
+    case 'box':ctx.fillStyle=C.line;ctx.fillRect(p.x,p.y,p.w,FL-p.y);ctx.strokeStyle=C.prop;ctx.lineWidth=1.5;ctx.strokeRect(p.x,p.y,p.w,FL-p.y);break;
+    case 'bench':ctx.fillStyle=C.prop;ctx.fillRect(p.x,p.y,p.w,7);ln(ctx,[p.x+10,p.y+7],[p.x+10,FL],4,C.prop);ln(ctx,[p.x+p.w-10,p.y+7],[p.x+p.w-10,FL],4,C.prop);break;
+    case 'seg':ln(ctx,p.a,p.b,p.w,C.prop);break;
+    case 'bar':circ(ctx,[p.x,p.y],4.5,C.prop,C.ink,1.2);break;
+    case 'pulley':circ(ctx,[p.x,p.y],6,C.stage,C.prop,2);break;
+    case 'cable':ln(ctx,jp(J,p.at),p.to,1.5,C.prop);circ(ctx,p.to,5.5,C.stage,C.prop,2);break;
+    case 'band':ctx.setLineDash([5,4]);ln(ctx,jp(J,p.at),p.to,2.5,C.accent);ctx.setLineDash([]);circ(ctx,p.to,4,C.accent);break;
+    case 'bandJ':ln(ctx,jp(J,p.a),jp(J,p.b),3.5,C.accent);break;
+    case 'plate':{const q=add(jp(J,p.at),p.off||Z);circ(ctx,q,p.r||17,C['p-'+ex.c],C['plate-edge'],1.6);circ(ctx,q,3.2,C.stage,C['plate-edge'],1.2);break}
+    case 'db':{const q=jp(J,p.at),r=p.big?7:5.5;circ(ctx,q,r,C.prop,C.ink,1.3);break}
+    case 'grip':circ(ctx,jp(J,p.at),3.8,C.prop,C.ink,1.2);break;
+    case 'slider':{const q=jp(J,p.at);ln(ctx,[q[0]-7,FL-1.5],[q[0]+7,FL-1.5],3,C.accent);break}
+    case 'par':ln(ctx,[p.x-14,p.y],[p.x+14,p.y],5,C.prop);ln(ctx,[p.x-11,p.y],[p.x-16,FL],3,C.prop);ln(ctx,[p.x+11,p.y],[p.x+16,FL],3,C.prop);break;
+  }
+}
+const zOf=p=>p.z||((p.at&&p.k!=='cable'&&p.k!=='band'&&p.k!=='slider')?'mid':'back');
+function limb(ctx,L,w,col,front){
+  ctx.strokeStyle=col;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(L.r[0],L.r[1]);ctx.lineTo(L.m[0],L.m[1]);ctx.lineTo(L.e[0],L.e[1]);
+  if(L.ft!=null){const fl=front?6:LEN.FT;ctx.lineTo(L.e[0]+Math.sin(L.ft*R)*fl,L.e[1]+Math.cos(L.ft*R)*fl)}
+  ctx.stroke();
+}
+function render(ctx,ex,J,vw){
+  const front=ex.v==='front',props=ex.props||[];
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ln(ctx,[vw.x0,FL+1],[vw.x1,FL+1],2,C.line);
+  props.filter(p=>zOf(p)==='back').forEach(p=>drawProp(ctx,p,J,ex,vw));
+  const farC=front?C.ink:C.far;
+  limb(ctx,J.fF,7.5,farC,front);limb(ctx,J.hF,6.5,farC,front);
+  ln(ctx,J.hip,J.sh,front?9:11,C.ink);
+  if(front){ln(ctx,J.shN,J.shF,7,C.ink);ln(ctx,J.hipN,J.hipF,7,C.ink)}
+  props.filter(p=>zOf(p)==='mid').forEach(p=>drawProp(ctx,p,J,ex,vw));
+  ln(ctx,J.sh,J.head,6,C.ink);circ(ctx,J.head,LEN.HEAD,C.ink);
+  limb(ctx,J.fN,7.5,C.ink,front);limb(ctx,J.hN,6.5,C.ink,front);
+  props.filter(p=>zOf(p)==='front').forEach(p=>drawProp(ctx,p,J,ex,vw));
+}
+function drawAnim(a,now){
+  const cv=a.cv,W=cv.clientWidth,H=cv.clientHeight;if(!W||!H)return;
+  const dpr=Math.min(2,window.devicePixelRatio||1),pw=Math.round(W*dpr),ph=Math.round(H*dpr);
+  if(cv.width!==pw||cv.height!==ph){cv.width=pw;cv.height=ph}
+  const ctx=cv.getContext('2d');ctx.setTransform(1,0,0,1,0,0);ctx.fillStyle=C.stage;ctx.fillRect(0,0,pw,ph);
+  const ex=a.ex,tm=a.paused?a.tp:(now-a.t0)/1000,J=sample(ex,tm);
+  const vb=ex.vb||VB,s=Math.min(W/vb[2],H/vb[3]),tx=(W-vb[2]*s)/2-vb[0]*s,ty=(H-vb[3]*s)/2-vb[1]*s;
+  ctx.setTransform(dpr*s,0,0,dpr*s,dpr*tx,dpr*ty);
+  render(ctx,ex,J,{x0:-tx/s,x1:(W-tx)/s,y0:-ty/s});
+}
+
+/* ---------- exercise library ---------- */
+const EX={
+tib:{n:'Tibialis raise',c:'prep',v:'side',sp:.6,
+  cue:'Back and hips on a wall, heels about a foot out. Pull your toes up hard, lower them slowly.',
+  props:[{k:'wall',x:80}],
+  f:[{hip:[94,96],t:182,hN:{r:[4,52]},hF:{r:[2,52]},fN:[124,173],fF:[122,173]},{ftN:132,ftF:132}]},
+bandwalk:{n:'Lateral band walk',c:'prep',v:'front',sp:.45,hold:.1,
+  cue:'Band just above the knees, half squat. Step sideways without letting the knees cave in.',
+  props:[{k:'bandJ',a:'kN',b:'kF',z:'front'}],
+  f:[{hip:[124,104],t:180,hN:{a:[14,4]},hF:{a:[-14,-4]},fN:[146,173],fF:[104,173]},
+     {hip:[128,104],fN:[160,166]},{hip:[134,104],fN:[162,173]},
+     {hip:[137,104],fF:[118,166]},{hip:[140,104],fF:[120,173]}]},
+legswing:{n:'Leg swings',c:'prep',v:'side',sp:.55,hold:.05,
+  cue:'Hold something for balance. Swing one leg front to back, relaxed, gradually bigger.',
+  f:[{hip:[124,92],t:180,hN:{r:[16,44]},hF:{r:[14,46]},fF:[124,173],fN:{r:[-36,70]}},{fN:{r:[52,60]},t:184}]},
+lunge:{n:'Bodyweight split squat',c:'legs',v:'side',sp:.9,
+  cue:'Long split stance. Drop the back knee straight down, keep the front shin fairly upright.',
+  f:[{hip:[124,96],t:180,hN:{r:[3,53]},hF:{r:[1,53]},fN:[150,173],fF:[96,166],ftF:45},{hip:[122,130]}]},
+extrot:{n:'Band external rotation',c:'prep',v:'front',sp:.9,
+  cue:'Elbow bent to 90° and pinned to your side. Rotate the forearm outward, pause, return slowly.',
+  props:[{k:'band',at:'hN',to:[40,78]}],
+  f:[{hip:[128,92],t:180,hN:{a:[4,-82]},hF:{a:[-4,-2]},fN:[136,173],fF:[120,173]},{hN:{a:[4,72]}}]},
+yraise:{n:'Y-raise',c:'prep',v:'side',sp:1,
+  cue:'Chest on an incline bench, thumbs up. Raise straight arms into a Y and squeeze the lower traps. Light weight.',
+  props:[{k:'seg',a:[96,147],b:[140,116],w:9},{k:'seg',a:[106,142],b:[106,FL],w:3},{k:'seg',a:[134,121],b:[134,FL],w:3}],
+  f:[{hip:[92,138],t:125,hN:{a:[2,2]},hF:{a:[-2,0]},fN:[22,166],fF:[22,166],ftN:20,ftF:20},{hN:{a:[140,140]},hF:{a:[138,138]}}]},
+pushplus:{n:'Push-up plus',c:'prep',v:'side',sp:.7,
+  cue:'Top of a push-up, arms locked. Push the floor away so the upper back rounds slightly, then let it sink.',
+  f:[{...body(40,166,110),hN:[164,174],hF:[162,174],fN:[40,166],fF:[40,166],ftN:20,ftF:20},{...body(40,166,112)}]},
+
+pogo:{n:'Pogo hops',c:'plyo',v:'side',sp:.26,hold:.02,
+  cue:'Small, quick hops off the balls of your feet. Stiff ankles, minimal knee bend, bounce like a spring.',
+  f:[{hip:[124,92],t:180,hN:{r:[8,48]},hF:{r:[6,48]},fN:{r:[2,78]},fF:{r:[-2,78]},ftN:50,ftF:50},{o:[0,-14]}]},
+skip:{n:'A-skips',c:'plyo',v:'side',mode:'loop',sp:.28,hold:.03,
+  cue:'Rhythmic skip: drive one knee to hip height, strike down under the hip, arms swinging opposite.',
+  f:[{hip:[124,90],t:178,fN:{r:[40,40]},fF:{r:[-2,79]},ftN:90,ftF:50,hN:{r:[-22,44]},hF:{r:[26,34]},o:[0,0]},
+     {fN:{r:[4,79]},fF:{r:[-4,79]},ftN:50,hN:{r:[2,52]},hF:{r:[2,52]},o:[0,-6]},
+     {fF:{r:[40,40]},fN:{r:[-2,79]},ftF:90,ftN:50,hF:{r:[-22,44]},hN:{r:[26,34]},o:[0,0]},
+     {fN:{r:[4,79]},fF:{r:[-4,79]},ftF:50,hN:{r:[2,52]},hF:{r:[2,52]},o:[0,-6]}]},
+bound:{n:'Bounding',c:'plyo',v:'side',mode:'loop',sp:.42,hold:.04,
+  cue:'Exaggerated running strides. Push off hard, drive the front knee, float, land under your hip.',
+  f:[{hip:[124,86],t:168,fN:{r:[42,44]},fF:{r:[-46,66]},ftN:90,ftF:30,hN:{r:[-28,40]},hF:{r:[30,30]}},
+     {fF:{r:[42,44]},fN:{r:[-46,66]},ftF:90,ftN:30,hF:{r:[-28,40]},hN:{r:[30,30]}}]},
+boxjump:{n:'Box jump',c:'plyo',v:'side',mode:'cut',sp:.4,hold:.2,vb:[0,-44,270,228],
+  cue:'Quick dip, swing the arms, jump and land softly on the box. Step down, reset, repeat.',
+  props:[{k:'box',x:172,y:128,w:70}],
+  f:[{hip:[80,92],t:180,fN:[82,173],fF:[80,173],hN:{r:[4,52]},hF:{r:[2,52]},d:.4},
+     {hip:[66,118],t:138,hN:{r:[-34,40]},hF:{r:[-36,38]},d:.5},
+     {hip:[126,62],t:160,fN:{r:[36,34]},fF:{r:[32,38]},hN:{r:[34,-36]},hF:{r:[32,-38]},d:.28},
+     {hip:[168,64],t:150,fN:[192,124],fF:[190,124],hN:{r:[36,20]},hF:{r:[34,22]},d:.28},
+     {hip:[190,44],t:180,hN:{r:[4,52]},hF:{r:[2,52]},d:.45}]},
+broadjump:{n:'Broad jump',c:'plyo',v:'side',mode:'cut',sp:.4,hold:.2,vb:[0,0,280,200],
+  cue:'Swing the arms back, jump forward as far as you can and stick the landing in a quarter squat.',
+  f:[{hip:[46,92],t:180,fN:[48,173],fF:[46,173],hN:{r:[4,52]},hF:{r:[2,52]},d:.4},
+     {hip:[34,120],t:136,hN:{r:[-36,36]},hF:{r:[-38,34]},d:.5},
+     {hip:[120,72],t:150,fN:{r:[40,32]},fF:{r:[36,36]},hN:{r:[46,-10]},hF:{r:[44,-8]},d:.3},
+     {hip:[190,120],t:140,fN:[214,173],fF:[212,173],hN:{r:[46,14]},hF:{r:[44,16]},d:.3},
+     {hip:[208,94],t:176,hN:{r:[4,52]},hF:{r:[2,52]},d:.45}]},
+slhop:{n:'Single-leg hops',c:'plyo',v:'side',sp:.3,hold:.03,
+  cue:'Hop on one leg, quick and springy, landing on the ball of the foot. Forward-back or side to side.',
+  f:[{hip:[124,94],t:176,fN:{r:[3,76]},ftN:50,fF:{r:[-24,50]},ftF:40,hN:{r:[20,38]},hF:{r:[-18,44]}},
+     {o:[0,-16],hN:{r:[-18,44]},hF:{r:[20,38]}}]},
+
+squat:{n:'Barbell back squat',c:'legs',v:'side',sp:1.1,
+  cue:'Bar on your upper back, brace, sit down between your hips to about parallel, then drive up.',
+  props:[{k:'plate',at:'sh',off:[-4,-2],r:15}],
+  f:[{hip:[126,92],t:178,hN:{r:[-6,3],b:1},hF:{r:[-6,3],b:1},fN:[128,173],fF:[127,173]},{hip:[105,131],t:140}]},
+bss:{n:'Bulgarian split squat',c:'legs',v:'side',sp:1,
+  cue:'Rear foot on a bench, weight on the front leg. Lower until the back knee nearly touches the floor.',
+  props:[{k:'box',x:64,y:141,w:46},{k:'db',at:'hN'},{k:'db',at:'hF'}],
+  f:[{hip:[149,95],t:176,hN:{r:[2,53]},hF:{r:[0,53]},fN:[162,173],fF:[100,137],ftF:-80},{hip:[132,133],t:165}]},
+pistol:{n:'Pistol squat (to box)',c:'legs',v:'side',sp:1.1,
+  cue:'On one leg, reach the other leg and your arms forward and sit back to a box. Lower the box as you get stronger.',
+  props:[{k:'box',x:86,y:142,w:32}],
+  f:[{hip:[124,92],t:178,fN:[128,173],fF:{r:[18,70]},hN:{r:[30,40]},hF:{r:[28,40]}},
+     {hip:[104,138],t:140,fF:{r:[80,2]},hN:{r:[54,4]},hF:{r:[52,6]}}]},
+stepup:{n:'Step-up',c:'legs',v:'side',sp:1,vb:[0,-34,270,224],
+  cue:'Whole foot on a knee-height box. Drive up through that leg only and finish with the other knee high.',
+  props:[{k:'box',x:142,y:136,w:76},{k:'db',at:'hN'},{k:'db',at:'hF'}],
+  f:[{hip:[120,96],t:176,fN:[164,132],fF:[114,173],hN:{r:[2,53]},hF:{r:[0,53]}},{hip:[160,54],t:178,fF:{r:[36,38]}}]},
+calfbent:{n:'Bent-knee calf raise',c:'legs',v:'side',sp:.9,
+  cue:'Knees bent about 30° the whole time. Rise high on the balls of the feet, lower below the step. Works the soleus.',
+  props:[{k:'box',x:140,y:160,w:70},{k:'db',at:'hN'}],
+  f:[{hip:[118,90],t:176,hN:{r:[3,53]},hF:{r:[1,53]},fN:[134,165],fF:[133,165],ftN:115,ftF:115},
+     {hip:[120,78],fN:[136,152],fF:[135,152],ftN:50,ftF:50}]},
+calfsingle:{n:'Single-leg calf raise',c:'legs',v:'side',sp:1,hold:.35,
+  cue:'Straight knee, one foot on a step. Three seconds down, pause at the bottom, rise all the way up.',
+  props:[{k:'box',x:140,y:160,w:70}],
+  f:[{hip:[128,86],t:180,hN:{r:[4,52]},hF:{r:[2,52]},fN:[134,165],ftN:115,fF:{r:[-18,58]}},{hip:[130,73],fN:[136,152],ftN:50}]},
+
+nordic:{n:'Nordic curl',c:'hinge',v:'side',sp:1.3,hold:.3,
+  cue:'Kneel with ankles anchored. Keep hips straight, lower yourself as slowly as you can, catch with your hands, push back up.',
+  props:[{k:'seg',a:[98,176],b:[124,176],w:4},{k:'bar',x:64,y:163}],
+  f:[{hip:[110,130],t:180,fN:[70,170],fF:[70,170],ftN:-60,ftF:-60,hN:{r:[16,24]},hF:{r:[14,26]}},
+     {hip:[142,145],t:130,hN:{r:[22,28]},hF:{r:[20,30]}},
+     {hip:[150,161],t:105,hN:[206,174],hF:[204,174]}]},
+slidercurl:{n:'Slider hamstring curl',c:'hinge',v:'side',sp:1,
+  cue:'On your back, heels on sliders or a towel, hips up. Slide the heels out slowly, curl them back in with hips high.',
+  props:[{k:'slider',at:'aN'}],
+  f:[{hip:[112,140],t:-62,fN:[150,170],fF:[150,170],ftN:175,ftF:175,hN:[120,174],hF:[118,174]},
+     {hip:[112,156],t:-76,fN:[186,170],fF:[186,170]}]},
+deadlift:{n:'Deadlift',c:'hinge',v:'side',sp:1.1,
+  cue:'Bar over mid-foot, flat back, lats tight. Push the floor away and stand tall, lower along the same path.',
+  props:[{k:'plate',at:'hN',r:17}],
+  f:[{hip:[98,128],t:118,hN:[134,158],hF:[133,158],fN:[126,173],fF:[125,173]},{hip:[120,92],t:182,hN:{r:[6,52]},hF:{r:[5,52]}}]},
+rdl:{n:'Romanian deadlift',c:'hinge',v:'side',sp:1.2,
+  cue:'Start standing. Push the hips back with soft knees, bar sliding to mid-shin. Feel the hamstrings, then stand up.',
+  props:[{k:'plate',at:'hN',r:17}],
+  f:[{hip:[122,92],t:180,hN:{r:[4,52]},hF:{r:[3,52]},fN:[128,173],fF:[127,173]},{hip:[96,100],t:105,hN:{r:[-4,53]},hF:{r:[-5,53]}}]},
+slrdl:{n:'Single-leg RDL',c:'hinge',v:'side',sp:1.2,
+  cue:'Stand on one leg, soft knee. Tip forward as the free leg reaches back, hips level. Stand up through the heel.',
+  props:[{k:'db',at:'hN'}],
+  f:[{hip:[124,92],t:180,fN:[128,173],fF:{r:[-8,76]},ftF:60,hN:{r:[2,53]},hF:{r:[1,53]}},
+     {hip:[118,98],t:94,fF:{r:[-80,-6]},ftF:0,hN:{r:[0,53]},hF:{r:[-1,53]}}]},
+
+copenhagen:{n:'Copenhagen plank',c:'core',v:'front',sp:1.2,hold:.4,
+  cue:'Side plank with the top leg on a bench. Lift the hips and bring the bottom leg up to the bench. Start with the knee on the bench.',
+  props:[{k:'bench',x:176,y:134,w:60}],
+  f:[{hip:[118,152],t:-106,fN:[198,128],fF:[186,168],ftN:180,ftF:180,hF:[96,175],hN:{h:[-4,-10]}},
+     {hip:[120,130],t:-81,fF:[194,138]}]},
+sideplank:{n:'Side plank leg raise',c:'core',v:'front',sp:.9,hold:.2,
+  cue:'Side plank on your forearm, body in a straight line. Raise the top leg slowly and lower it with control.',
+  f:[{hip:[120,147],t:-106,fN:[200,162],fF:[200,170],ftN:180,ftF:180,hF:[96,175],hN:{h:[-4,-10]}},{fN:[192,120]}]},
+pallof:{n:'Pallof press',c:'core',v:'side',sp:.9,hold:.35,
+  cue:'Stand side-on to a band or cable at chest height. Press it straight out and hold without letting it twist you.',
+  props:[{k:'band',at:'hN',to:[56,64],z:'back'}],
+  f:[{hip:[122,95],t:180,fN:[134,173],fF:[112,173],hN:{r:[14,16]},hF:{r:[13,17]}},{hN:{r:[55,4]},hF:{r:[54,5]}}]},
+deadbug:{n:'Dead bug',c:'core',v:'side',mode:'loop',sp:.9,hold:.2,
+  cue:'On your back, arms up, knees over hips. Lower the opposite arm and leg slowly, low back pressed down.',
+  f:[{hip:[140,166],t:-90,hN:{r:[2,-54]},hF:{r:[0,-54]},fN:{r:[40,-42]},fF:{r:[38,-44]}},
+     {hN:{r:[-52,-10]},fF:{r:[80,-6]}},
+     {hN:{r:[2,-54]},fF:{r:[38,-44]}},
+     {hF:{r:[-52,-10]},fN:{r:[80,-6]}}]},
+plank:{n:'Forearm plank',c:'core',v:'side',sp:1.6,hold:.4,
+  cue:'Forearms under shoulders, glutes squeezed, ribs down. One straight line from head to heels.',
+  f:[{...body(40,166,99),hN:[196,175],hF:[194,175],fN:[40,166],fF:[40,166],ftN:20,ftF:20},{...body(40,166,100)}]},
+hangraise:{n:'Hanging leg raise',c:'core',v:'side',sp:1,
+  cue:'Hang from a bar, shoulders active. Raise straight legs to hip height or higher without swinging.',
+  props:[{k:'bar',x:132,y:22,z:'front'}],
+  f:[{hip:[130,130],t:180,hN:[132,24],hF:[131,24],fN:{r:[2,80]},fF:{r:[0,80]},ftN:25,ftF:25},
+     {hip:[124,126],t:184,fN:{r:[80,-4]},fF:{r:[80,-2]},ftN:170,ftF:170}]},
+lsit:{n:'L-sit',c:'core',v:'side',sp:1.6,hold:.5,
+  cue:'Hands on parallettes or the floor, arms locked, shoulders pushed down. Hold the legs straight out in front.',
+  props:[{k:'par',x:130,y:160}],
+  f:[{hip:[126,152],t:180,hN:[130,158],hF:[129,158],fN:{r:[82,-2]},fF:{r:[82,0]},ftN:170,ftF:170},
+     {hip:[126,149],fN:{r:[82,-6]},fF:{r:[82,-4]}}]},
+crunch:{n:'Seated crunch machine',c:'core',v:'side',sp:1,
+  cue:'Curl your ribs toward your hips. Move through the spine, not by pulling with the arms.',
+  props:[{k:'box',x:78,y:142,w:52},{k:'seg',a:[80,142],b:[76,70],w:6}],
+  f:[{hip:[104,138],t:176,hN:{r:[10,6],b:1},hF:{r:[9,7],b:1},fN:[150,173],fF:[148,173]},{t:140}]},
+farmer:{n:"Farmer's walk",c:'core',v:'side',mode:'loop',sp:.42,hold:0,
+  cue:'Heavy weight in each hand, tall posture, short quick steps. Grip hard and do not lean.',
+  props:[{k:'db',at:'hN',big:1},{k:'db',at:'hF',big:1}],
+  f:[{hip:[124,92],t:180,hN:{r:[3,54]},hF:{r:[2,54]},fN:{r:[24,77]},ftN:110,fF:{r:[-24,77]},ftF:60},
+     {hip:[124,90],fN:{r:[2,80]},ftN:90,fF:{r:[-4,64]},ftF:60},
+     {hip:[124,92],fF:{r:[24,77]},ftF:110,fN:{r:[-24,77]},ftN:60},
+     {hip:[124,90],fF:{r:[2,80]},ftF:90,fN:{r:[-4,64]},ftN:60}]},
+
+pullup:{n:'Neutral-grip pull-up',c:'pull',v:'side',sp:1,
+  cue:'Palms facing each other. Pull your chest toward the bar, lower all the way to straight arms. Add weight when 8 reps is easy.',
+  props:[{k:'bar',x:136,y:20,z:'front'}],
+  f:[{hip:[130,128],t:178,hN:[136,22],hF:[135,22],fN:{r:[-6,78]},fF:{r:[-8,78]},ftN:40,ftF:40},{hip:[118,90],t:174}]},
+pulldown:{n:'Wide-grip lat pulldown',c:'pull',v:'side',sp:1,
+  cue:'Thighs locked under the pad. Pull the bar to your upper chest, elbows driving down, control it back up.',
+  props:[{k:'box',x:94,y:142,w:40},{k:'seg',a:[144,124],b:[166,124],w:7},{k:'cable',at:'hN',to:[136,4]},{k:'grip',at:'hN'}],
+  f:[{hip:[114,138],t:172,hN:[136,42],hF:[135,42],fN:[160,173],fF:[158,173]},{hN:[136,96],hF:[135,96],t:168}]},
+row:{n:'Barbell row',c:'pull',v:'side',sp:.8,
+  cue:'Hinge to about 45°, back flat. Row the bar to your lower ribs, lower it under control.',
+  props:[{k:'plate',at:'hN',r:17}],
+  f:[{hip:[102,104],t:120,hN:{r:[1,54]},hF:{r:[0,54]},fN:[128,173],fF:[127,173]},{hN:[128,100],hF:[127,100]}]},
+invrow:{n:'Inverted row',c:'pull',v:'side',sp:.9,b:{hN:1,hF:1},
+  cue:'Hang under a bar or rings, heels on the floor, body straight. Pull your chest to the bar.',
+  props:[{k:'seg',a:[160,104],b:[160,FL],w:4},{k:'bar',x:152,y:104,z:'front'}],
+  f:[{...body(40,170,96),hN:[152,104],hF:[151,104],fN:[40,170],fF:[40,170],ftN:170,ftF:170},{...body(40,170,116)}]},
+dbrow:{n:'One-arm dumbbell row',c:'pull',v:'side',sp:.85,
+  cue:'Hand and knee on a bench, back flat. Row the dumbbell toward your hip, shoulders square.',
+  props:[{k:'bench',x:48,y:150,w:112},{k:'db',at:'hN'}],
+  f:[{hip:[92,106],t:95,hN:{r:[2,52]},hF:[146,150],fN:[100,173],fF:[56,146],ftF:-90},{hN:[118,108]}]},
+facepull:{n:'Face pull',c:'pull',v:'side',sp:.9,hold:.3,
+  cue:'Rope at face height. Pull toward your face, elbows high, and finish with your hands beside your ears.',
+  props:[{k:'cable',at:'hN',to:[236,46]}],
+  f:[{hip:[112,94],t:184,fN:[128,173],fF:[102,173],hN:{r:[54,4]},hF:{r:[53,5]}},{hN:{r:[6,-14]},hF:{r:[5,-13]}}]},
+revcurl:{n:'Barbell reverse curl',c:'pull',v:'side',sp:.9,
+  cue:'Overhand grip. Elbows stay pinned at your sides while you curl, lower slowly. Builds the forearms.',
+  props:[{k:'plate',at:'hN',r:13}],
+  f:[{hip:[124,92],t:180,hN:{r:[4,54]},hF:{r:[3,54]},fN:[126,173],fF:[124,173]},{hN:{r:[16,4]},hF:{r:[15,5]}}]},
+
+bench:{n:'Bench press',c:'push',v:'side',sp:1,
+  cue:'Shoulder blades pinched, feet planted. Lower the bar to the lower chest and press back up over the shoulders.',
+  props:[{k:'bench',x:36,y:140,w:124},{k:'plate',at:'hN',r:17}],
+  f:[{hip:[122,133],t:-90,hN:{r:[2,-54]},hF:{r:[1,-54]},fN:[166,173],fF:[164,173]},{hN:{r:[12,-9]},hF:{r:[11,-9]}}]},
+incline:{n:'Incline press',c:'push',v:'side',sp:1,
+  cue:'Bench at 30–45°. Lower the bar or dumbbells to the upper chest, press up over the shoulders.',
+  props:[{k:'seg',a:[108,147],b:[66,88],w:9},{k:'seg',a:[96,149],b:[134,149],w:8},{k:'seg',a:[112,152],b:[112,FL],w:4},{k:'plate',at:'hN',r:17}],
+  f:[{hip:[112,140],t:-145,hN:{r:[10,-54]},hF:{r:[9,-54]},fN:[160,173],fF:[158,173]},{hN:{r:[18,-6]},hF:{r:[17,-6]}}]},
+machinepress:{n:'Machine chest press',c:'push',v:'side',sp:.9,
+  cue:'Seat set so the handles are at mid-chest. Press out without slamming into lockout, return slowly.',
+  props:[{k:'box',x:80,y:140,w:44},{k:'seg',a:[84,138],b:[84,60],w:8},{k:'grip',at:'hN'}],
+  f:[{hip:[98,136],t:180,hN:{r:[16,6]},hF:{r:[15,7]},fN:[140,173],fF:[138,173]},{hN:{r:[54,2]},hF:{r:[53,3]}}]},
+ohp:{n:'Barbell shoulder press',c:'push',v:'side',sp:1,vb:[0,-46,270,226],
+  cue:'Bar on the front of the shoulders, glutes tight. Press straight up and move your head through at the top.',
+  props:[{k:'plate',at:'hN',r:15}],
+  f:[{hip:[124,92],t:180,hN:{r:[12,-2]},hF:{r:[11,-1]},fN:[126,173],fF:[124,173]},{hN:{r:[2,-55]},hF:{r:[1,-55]}}]},
+pike:{n:'Pike push-up',c:'push',v:'side',sp:1,
+  cue:'Hips high in an upside-down V. Bend the elbows and bring your head toward the floor in front of your hands.',
+  f:[{hip:[110,100],t:55,hN:[166,174],hF:[164,174],fN:[74,172],fF:[74,172],ftN:60,ftF:60},{hip:[114,106],t:38}]},
+hspu:{n:'Handstand push-up',c:'push',v:'side',sp:1.1,vb:[0,-40,270,222],
+  cue:'Kick up to a wall. Lower your head to the floor with control and press back to straight arms. Use pike push-ups until you get there.',
+  props:[{k:'wall',x:180}],
+  f:[{hip:[160,68],t:4,hN:[160,174],hF:[159,174],fN:{r:[16,-80]},fF:{r:[16,-80]},ftN:180,ftF:180},{hip:[160,96]}]},
+dips:{n:'Weighted dips',c:'push',v:'side',sp:1,
+  cue:'Lean slightly forward, lower until the upper arms are about parallel to the floor, press back to lockout.',
+  props:[{k:'seg',a:[140,112],b:[140,FL],w:4},{k:'bar',x:134,y:112,z:'front'},{k:'plate',at:'hip',off:[4,24],r:10}],
+  f:[{hip:[126,108],t:178,hN:[134,112],hF:[133,112],fN:{r:[-22,64]},fF:{r:[-24,62]},ftN:20,ftF:20},{hip:[112,134],t:160}]},
+latraise:{n:'Lateral raise',c:'push',v:'front',sp:1,
+  cue:'Slight bend in the elbows. Raise the dumbbells out to the side up to shoulder height, lower slowly.',
+  props:[{k:'db',at:'hN'},{k:'db',at:'hF'}],
+  f:[{hip:[130,92],t:180,hN:{a:[12,6]},hF:{a:[-12,-6]},fN:[138,173],fF:[122,173]},{hN:{a:[86,96]},hF:{a:[-86,-96]}}]},
+ohtri:{n:'Overhead triceps extension',c:'push',v:'side',sp:1,vb:[0,-46,270,226],
+  cue:'Dumbbell or cable overhead. Keep the elbows pointing up, lower the weight behind your head, then extend.',
+  props:[{k:'db',at:'hN',big:1}],
+  f:[{hip:[124,92],t:180,hN:{r:[4,-55]},hF:{r:[3,-55]},fN:[126,173],fF:[124,173]},{hN:{r:[-14,-16]},hF:{r:[-15,-15]}}]},
+bartri:{n:'Bodyweight triceps extension',c:'push',v:'side',sp:1,b:{hN:1,hF:1},
+  cue:'Hands on a bar at hip height, body straight. Bend only at the elbows so your head goes under the bar, then press back.',
+  props:[{k:'seg',a:[214,118],b:[214,FL],w:4},{k:'bar',x:208,y:118,z:'front'}],
+  f:[{...body(60,168,125),hN:[208,118],hF:[207,118],fN:[60,168],fF:[60,168],ftN:45,ftF:45},{...body(60,168,112)}]},
+pushup:{n:'Push-up',c:'push',v:'side',sp:1,
+  cue:'Hands under shoulders, body in one line. Chest nearly to the floor, elbows about 45° from the body. Add a vest or plate to load it.',
+  f:[{...body(40,166,110),hN:[164,174],hF:[162,174],fN:[40,166],fF:[40,166],ftN:20,ftF:20},{...body(40,166,99)}]},
+fepushup:{n:'Feet-elevated push-up',c:'push',v:'side',sp:1,
+  cue:'Feet on a bench or box, same form as a push-up. The higher the feet, the more upper chest and shoulders.',
+  props:[{k:'box',x:8,y:112,w:56}],
+  f:[{...body(40,104,84),hN:[172,174],hF:[170,174],fN:[40,104],fF:[40,104],ftN:20,ftF:20},{...body(40,104,74)}]},
+};
+EX.chinup=Object.assign({},EX.pullup,{n:'Chin-up',
+  cue:'Palms facing you, hands shoulder-width. Pull until your chin clears the bar. Works the biceps more than other grips.'});
+EX.curl=Object.assign({},EX.revcurl,{n:'Dumbbell curl',props:[{k:'db',at:'hN'}],
+  cue:'Palms up, elbows pinned at your sides. Curl up without swinging, lower slowly.'});
+EX.suitcase=Object.assign({},EX.farmer,{n:'Suitcase carry',props:[{k:'db',at:'hN',big:1}],
+  cue:'Weight in one hand only. Walk tall without leaning toward or away from it. Switch hands each set.'});
+
+EX.cablekick={n:'Cable kickback',c:'hinge',v:'side',sp:.9,hold:.3,
+  cue:'Ankle strap on a low cable, hold the frame, slight forward lean. Push the leg straight back from the hip without arching your lower back.',
+  props:[{k:'seg',a:[180,58],b:[180,FL],w:5},{k:'cable',at:'aN',to:[180,168]}],
+  f:[{hip:[120,94],t:162,hN:[176,80],hF:[175,80],fF:[124,173],fN:{r:[6,79]},ftN:90},
+     {fN:{r:[-60,54]},ftN:40}]};
+EX.donkey={n:'Donkey kick',c:'hinge',v:'side',sp:.9,hold:.3,
+  cue:'On hands and knees, back flat. Keep the knee bent at 90° and drive the foot up toward the ceiling, squeezing the glute. Do not arch.',
+  f:[{hip:[92,120],t:90,hN:[143,175],hF:[142,175],fF:[52,172],fN:[52,172],ftN:-95,ftF:-95},
+     {fN:[52,72],ftN:-100}]};
+EX.cableabd={n:'Cable side leg raise',c:'legs',v:'front',sp:.9,hold:.3,
+  cue:'Ankle strap on a low cable on the side of your standing leg. Hold the frame, stand tall and lift the working leg out to the side. Slow on the way down.',
+  props:[{k:'seg',a:[78,50],b:[78,FL],w:5},{k:'cable',at:'aN',to:[78,168]}],
+  f:[{hip:[120,92],t:180,hF:[84,90],hN:{a:[40,-60]},fF:[112,173],fN:{r:[-4,80]}},
+     {fN:{r:[40,70]}}]};
+EX.sideadd={n:'Side-lying adduction',c:'core',v:'front',sp:.9,hold:.3,
+  cue:'Lie on your side propped on a forearm, top foot planted in front of the bottom knee. Lift the straight bottom leg a few inches, pause, lower slowly.',
+  f:[{hip:[120,165],t:-106,hF:[96,175],hN:{h:[-4,-10]},fF:[199,174],fN:[152,175],ftF:180,ftN:180},
+     {fF:[193,150]}]};
+
+const CATS={prep:'Prep',plyo:'Plyo',legs:'Legs',hinge:'Hinge',pull:'Pull',push:'Push',core:'Core'};
+
+/* ---------- body parts ---------- */
+const REG={
+  feet:{n:'Feet & ankles',why:'Stiff, springy ankles and Achilles return energy every stride, so the same pace costs less.'},
+  shins:{n:'Shins',why:'Balance the calves and protect against shin splints.'},
+  calves:{n:'Calves',why:'They take several times your body weight on every step. The soleus (bent knee) does most of that work, the gastrocnemius (straight knee) adds the push-off snap.'},
+  quads:{n:'Quads',why:'Absorb every landing, power the hills and drive every pedal stroke.'},
+  hamstrings:{n:'Hamstrings',why:'Swing the leg through and brake it at speed. They are the most commonly strained muscle in runners.'},
+  adductors:{n:'Inner thighs',why:'Keep the pelvis steady and protect the groin, especially on turns and uneven ground.'},
+  glutes:{n:'Glutes',why:'Hip extension is the main engine of push-off, climbing and sprinting.'},
+  hipside:{n:'Side hips',why:'The glute medius keeps your pelvis level on one leg. When it is weak, knees cave in and hips drop, a classic cause of runner’s knee.'},
+  core:{n:'Core',why:'A stiff trunk passes force from the legs into the ground and keeps your posture from falling apart late in a race.'},
+  lowback:{n:'Lower back',why:'Holds the spine rigid under load and on long days in the saddle.'},
+  lats:{n:'Lats',why:'The main pulling muscle. It also stabilises the shoulders and trunk and drives the arm swing.'},
+  midback:{n:'Upper & mid back',why:'Controls the shoulder blades and posture, and counters the hunched position on the bike.'},
+  reardelt:{n:'Rear shoulders & rotator cuff',why:'Keep the shoulder joint centred and healthy, and balance all the pressing.'},
+  chest:{n:'Chest',why:'The main pushing muscle, for general upper-body strength.'},
+  frontdelt:{n:'Front shoulders',why:'Overhead strength and a stable shoulder in pressing.'},
+  sidedelt:{n:'Side shoulders',why:'The only muscle a lateral raise isolates. Makes the shoulders wider and steadier overhead.'},
+  biceps:{n:'Biceps',why:'Help in every pull and protect the elbows.'},
+  triceps:{n:'Triceps',why:'Lock out every press and make up about two-thirds of upper-arm size.'},
+  forearms:{n:'Forearms & grip',why:'Grip limits deadlifts, pull-ups and carries. Strong forearms also keep the elbows healthy.'},
+};
+const GROUPS=[['Legs & hips',['feet','shins','calves','quads','hamstrings','adductors','glutes','hipside']],
+  ['Trunk',['core','lowback']],
+  ['Upper body',['lats','midback','reardelt','chest','frontdelt','sidedelt','biceps','triceps','forearms']]];
+
+/* what each exercise works (first = main) and what it focuses on */
+const HITS={
+  tib:['shins'],bandwalk:['hipside'],legswing:[],lunge:['quads','glutes'],extrot:['reardelt'],yraise:['midback','reardelt'],pushplus:[],
+  pogo:['feet','calves'],skip:['feet','calves'],bound:['feet','calves','glutes'],boxjump:['quads','glutes','calves'],
+  broadjump:['glutes','quads','hamstrings'],slhop:['feet','calves','hipside'],
+  squat:['quads','glutes','adductors','lowback'],bss:['quads','glutes','adductors'],pistol:['quads','glutes','feet'],stepup:['quads','glutes'],
+  calfbent:['calves'],calfsingle:['calves','feet'],
+  nordic:['hamstrings'],slidercurl:['hamstrings','glutes'],deadlift:['hamstrings','glutes','lowback','forearms','midback'],
+  rdl:['hamstrings','glutes','lowback'],slrdl:['hamstrings','glutes','hipside','feet'],
+  cablekick:['glutes','hamstrings'],donkey:['glutes'],cableabd:['hipside'],sideadd:['adductors'],
+  copenhagen:['adductors','core'],sideplank:['hipside','core'],pallof:['core'],deadbug:['core'],plank:['core'],
+  hangraise:['core','forearms'],lsit:['core','triceps'],crunch:['core'],farmer:['forearms','core','midback'],suitcase:['core','forearms'],
+  pullup:['lats','biceps','forearms','midback'],chinup:['lats','biceps','forearms'],pulldown:['lats','biceps'],
+  row:['midback','lats','reardelt','biceps','lowback'],invrow:['midback','reardelt','biceps','core'],dbrow:['midback','lats','biceps'],
+  facepull:['reardelt','midback'],revcurl:['forearms','biceps'],curl:['biceps','forearms'],
+  bench:['chest','triceps','frontdelt'],incline:['chest','frontdelt','triceps'],machinepress:['chest','triceps'],
+  ohp:['frontdelt','sidedelt','triceps','core'],pike:['frontdelt','triceps'],hspu:['frontdelt','triceps','sidedelt'],
+  dips:['triceps','chest','frontdelt'],latraise:['sidedelt'],ohtri:['triceps'],bartri:['triceps','core'],
+  pushup:['chest','triceps','frontdelt','core'],fepushup:['chest','frontdelt','triceps'],
+};
+const FOCUS={
+  tib:'The muscle on the front of the shin that lifts the foot. Helps prevent shin splints.',
+  bandwalk:'Wakes up the side hips before squats and jumps.',
+  legswing:'Dynamic hip mobility. Loosens the hamstrings and hip flexors.',
+  lunge:'Takes the knees and hips through their full range before you load them.',
+  extrot:'Rotator cuff. Keeps the shoulder joint centred under heavy pressing and pulling.',
+  yraise:'Lower traps. Pull the shoulder blades down and back.',
+  pushplus:'Serratus. Keeps the shoulder blades flat against the ribs.',
+  pogo:'Ankle and Achilles stiffness, the spring that returns energy each stride.',
+  skip:'Rhythm and landing under the hip, plus springiness.',
+  bound:'Longer, more horizontal push. Power per stride.',
+  boxjump:'Maximum upward power, with soft, low-impact landings.',
+  broadjump:'Horizontal power, the closest match to a sprint push-off.',
+  slhop:'One-leg springiness and landing control, exactly like running.',
+  squat:'The heaviest load for quads and glutes. Builds raw strength.',
+  bss:'One leg at a time: fixes left/right imbalances, big quad and glute stretch, easy on the back.',
+  pistol:'Single-leg strength, balance and ankle mobility with no equipment.',
+  stepup:'Drives up like a hill stride or a pedal stroke. Very running-specific.',
+  calfbent:'Soleus, the deep calf that carries the most load when running.',
+  calfsingle:'Gastrocnemius and Achilles through full range. One leg exposes a weaker side.',
+  nordic:'Lowering strength at long hamstring length. The best evidence of any exercise for fewer hamstring strains.',
+  slidercurl:'Easier to scale than Nordics. Trains lifting and lowering, works at home.',
+  deadlift:'The most weight you can lift. Whole back of the body, grip and bracing.',
+  rdl:'More hamstring stretch and lighter on the lower back than a deadlift.',
+  slrdl:'Hamstrings plus hip and ankle stability on one leg.',
+  cablekick:'Glutes at full hip extension, the push-off position. Little fatigue, easy to add load.',
+  donkey:'Bodyweight glute isolation. Good at home or as a warm-up.',
+  cableabd:'Side hips with added weight, easy to progress in small steps.',
+  sideadd:'Simple inner-thigh isolation, the lead-up to the Copenhagen plank.',
+  copenhagen:'Inner thighs under a lot of load. Strong adductors protect the groin.',
+  sideplank:'Glute medius (keeps the pelvis level on one leg) plus the side core.',
+  pallof:'Resists twisting. Keeps the trunk still while arms and legs move.',
+  deadbug:'Resists lower-back arching. Teaches ribs-down bracing.',
+  plank:'Simple whole-trunk hold that resists sagging.',
+  hangraise:'Lower abs and hip flexors, plus grip and hanging strength.',
+  lsit:'Abs, hip flexors and triceps in one hold. No bar needed.',
+  crunch:'Loaded spinal flexion. Easy to add weight.',
+  farmer:'Grip, upper traps and a braced trunk under heavy load.',
+  suitcase:'One-sided load, so the side core has to stop you leaning, like stabilising a running stride.',
+  pullup:'Lats and upper back through a big range. The neutral grip is easiest on the elbows.',
+  chinup:'Lats plus the most biceps work of any pull-up grip.',
+  pulldown:'Adjustable load. The wide grip emphasises the upper lats.',
+  row:'The heaviest horizontal pull. Thick mid-back, and it also trains holding a hinge.',
+  invrow:'Bodyweight row. Shoulder blades move freely and it is easy on the lower back.',
+  dbrow:'One arm at a time, longer range, back supported.',
+  facepull:'Rear shoulders and external rotation. Balances all the pressing.',
+  revcurl:'Forearm extensors and brachioradialis. Good for elbow health and grip.',
+  curl:'Straight biceps isolation.',
+  bench:'The heaviest press. Chest, front shoulders and triceps.',
+  incline:'Upper chest and front shoulders.',
+  machinepress:'Fixed path, so it is safe to push close to failure.',
+  ohp:'Shoulders and triceps overhead while the whole body braces.',
+  pike:'Bodyweight overhead press. Raise the feet to make it harder.',
+  hspu:'The hardest bodyweight shoulder press: your full weight overhead.',
+  dips:'Triceps and lower chest with a big stretch. Easy to add weight.',
+  latraise:'Side shoulders, the only isolation for shoulder width.',
+  ohtri:'Long head of the triceps in its stretched position.',
+  bartri:'Bodyweight triceps isolation on a bar or rings.',
+  pushup:'Scalable press. Shoulder blades move freely and the core works too.',
+  fepushup:'Shifts a push-up toward the upper chest and shoulders.',
+};
+for(const k in EX){EX[k].h=HITS[k]||[];EX[k].fo=FOCUS[k]||''}
+
+/* ---------- program ---------- */
+const WARM={
+  lower:[{ex:'tib',rx:'2 × 15–20'},{ex:'bandwalk',rx:'2 × 10 steps/side'},{ex:'legswing',rx:'1 × 10/leg'},{ex:'lunge',rx:'1 × 6/leg'}],
+  upper:[{ex:'extrot',rx:'2 × 15'},{ex:'yraise',rx:'2 × 10'},{ex:'pushplus',rx:'1 × 10'}]
+};
+/* parts: one section per body part, in session order. r = main target(s), slots = exercises */
+const DAYS={
+  lowerA:{name:'Lower A',sub:'Squat + runner strength',warm:'lower',
+    focus:'Plyos while fresh, the heavy squat, then the hamstring, calf, inner-thigh and glute work running needs.',
+    parts:[
+      {r:['feet'],slots:[
+        {ex:'pogo',rx:'3 × 20',note:'Quick, stiff ankles. Legs fresh.',alts:['slhop']},
+        {ex:'skip',rx:'3 × 20 m',alts:['bound']}]},
+      {r:['quads'],slots:[
+        {ex:'squat',rx:'4 × 4–6',note:'Main lift.',alts:['bss','pistol']},
+        {ex:'bss',rx:'3 × 6–10 / leg',note:'Bodyweight first, then dumbbells.',alts:['stepup','lunge','pistol']}]},
+      {r:['hamstrings'],slots:[
+        {ex:'nordic',rx:'3 × 3–6',note:'Slow lowering. Use a band or push-off to start.',alts:['slidercurl']}]},
+      {r:['calves'],label:'Calves · soleus',slots:[
+        {ex:'calfbent',rx:'3 × 12–15',note:'Seated machine or bent-knee standing.',alts:['calfsingle']}]},
+      {r:['adductors'],slots:[
+        {ex:'copenhagen',rx:'3 × 15–30 s / side',note:'Knee on the bench first, progress to the foot.',alts:['sideadd']}]},
+      {r:['glutes'],slots:[
+        {ex:'cablekick',rx:'2 × 12–15 / leg',opt:true,note:'The squat and split squat already work the glutes hard. Add this when you have time.',alts:['donkey']}]},
+      {r:['core'],slots:[
+        {ex:'pallof',rx:'2 × 10 / side',opt:true,alts:['deadbug','plank']}]},
+    ]},
+  upperB:{name:'Upper B',sub:'Pull',warm:'upper',
+    focus:'Vertical and horizontal pulling, biceps via chin-ups, rear shoulders, forearms and a hanging core finisher.',
+    parts:[
+      {r:['lats'],slots:[
+        {ex:'pullup',rx:'4 × 4–8',note:'Main lift. Add weight when 8 is easy.',alts:['chinup','pulldown']}]},
+      {r:['midback'],slots:[
+        {ex:'row',rx:'3 × 6–10',alts:['dbrow','invrow']},
+        {ex:'invrow',rx:'3 × 8–12',alts:['dbrow','pulldown']}]},
+      {r:['biceps'],slots:[
+        {ex:'chinup',rx:'3 × max',note:'Stop 1–2 reps short of failure.',alts:['curl']}]},
+      {r:['reardelt'],slots:[
+        {ex:'facepull',rx:'3 × 12–15',note:'Finish with hands by the ears.',alts:['yraise','extrot']}]},
+      {r:['forearms'],slots:[
+        {ex:'revcurl',rx:'2 × 10–12',alts:['curl']}]},
+      {r:['core'],slots:[
+        {ex:'hangraise',rx:'3 × 6–10',note:'L-sit option: 3 × 10–20 s.',alts:['lsit','deadbug']}]},
+    ]},
+  lowerB:{name:'Lower B',sub:'Hinge + single leg',warm:'lower',
+    focus:'Jumps, the deadlift, then one-leg strength, straight-knee calves, side hips and a loaded carry.',
+    parts:[
+      {r:['glutes','quads','calves'],label:'Whole-leg power',why:'Jumps teach the legs to produce force fast. Do them first, while fresh.',slots:[
+        {ex:'boxjump',rx:'4 × 3',note:'Full rest, max quality.',alts:['broadjump']}]},
+      {r:['feet'],label:'Feet & ankles · one leg',slots:[
+        {ex:'slhop',rx:'3 × 5 / leg',alts:['pogo','bound']}]},
+      {r:['hamstrings','glutes','lowback'],label:'Hinge · back of the body',why:'Hamstrings, glutes and lower back working together: the heaviest thing you lift all week.',slots:[
+        {ex:'deadlift',rx:'3 × 3–5',note:'Main lift. Some weeks swap for RDL 3 × 6–8.',alts:['rdl']}]},
+      {r:['quads','glutes'],label:'Quads & glutes · one leg',why:'Running is a series of one-leg jumps. This builds strength one side at a time.',slots:[
+        {ex:'stepup',rx:'3 × 6–8 / leg',alts:['pistol','bss']}]},
+      {r:['hamstrings'],label:'Hamstrings · balance',slots:[
+        {ex:'slrdl',rx:'3 × 8 / leg',note:'Bodyweight first, then a dumbbell.',alts:['rdl','slidercurl']}]},
+      {r:['calves'],label:'Calves · gastrocnemius',slots:[
+        {ex:'calfsingle',rx:'3 × 10–15 / leg',note:'3 s down, pause at the bottom.',alts:['calfbent']}]},
+      {r:['hipside'],slots:[
+        {ex:'sideplank',rx:'3 × 20–30 s / side',alts:['bandwalk']},
+        {ex:'cableabd',rx:'2 × 12–15 / side',opt:true,alts:['bandwalk']}]},
+      {r:['forearms','core'],label:'Grip & trunk',why:'Heavy carries build grip and a trunk that stays upright under load.',slots:[
+        {ex:'farmer',rx:'3 × 30–40 m',alts:['suitcase']}]},
+    ]},
+  upperA:{name:'Upper A',sub:'Push',warm:'upper',
+    focus:'Flat and incline pressing, overhead pressing, triceps, side shoulders and core.',
+    parts:[
+      {r:['chest'],slots:[
+        {ex:'bench',rx:'4 × 4–6',note:'Main lift.',alts:['pushup','dips']},
+        {ex:'incline',rx:'3 × 8–12',note:'Replaces the machine chest press.',alts:['fepushup','machinepress']}]},
+      {r:['frontdelt'],slots:[
+        {ex:'ohp',rx:'3 × 5–8',alts:['pike','hspu']}]},
+      {r:['triceps'],slots:[
+        {ex:'dips',rx:'3 × 6–10',alts:['pushup']},
+        {ex:'ohtri',rx:'3 × 10–12',alts:['bartri']}]},
+      {r:['sidedelt'],slots:[
+        {ex:'latraise',rx:'3 × 12–15'}]},
+      {r:['core'],slots:[
+        {ex:'deadbug',rx:'2–3 × 8 / side',note:'Plank option: 2–3 × 30–45 s.',alts:['plank','crunch']}]},
+    ]},
+  upperFull:{name:'Upper Full',sub:'Push + pull',warm:'upper',
+    focus:'For 3-day weeks: the key push and pull lifts in one session, fewer sets each.',
+    parts:[
+      {r:['lats'],slots:[{ex:'pullup',rx:'3 × 4–8',alts:['chinup','pulldown']}]},
+      {r:['chest'],slots:[{ex:'bench',rx:'3 × 5–8',alts:['dips','pushup']}]},
+      {r:['midback'],slots:[{ex:'row',rx:'3 × 8–10',alts:['invrow','dbrow']}]},
+      {r:['frontdelt'],slots:[{ex:'ohp',rx:'3 × 6–8',alts:['pike','hspu']}]},
+      {r:['biceps'],slots:[{ex:'chinup',rx:'2 × max',note:'Stop 1–2 reps short of failure.',alts:['curl']}]},
+      {r:['reardelt'],slots:[{ex:'facepull',rx:'2 × 15',alts:['yraise','extrot']}]},
+      {r:['core'],slots:[{ex:'hangraise',rx:'2 × 8–10',alts:['lsit','deadbug']}]},
+    ]},
+};
+const PLAN={
+  '4':{days:['lowerA','upperB','lowerB','upperA'],week:[
+    ['Mon','lowerA','Easy run'],['Tue','upperB','Easy ride'],['Wed',null,'Hard run',1],['Thu','lowerB',''],
+    ['Fri','upperA','Easy run or ride'],['Sat',null,'Long run or ride',1],['Sun',null,'Rest']]},
+  '3':{days:['lowerA','upperFull','lowerB'],week:[
+    ['Mon','lowerA','Easy run'],['Tue','upperFull','Easy ride'],['Wed',null,'Hard run',1],['Thu','lowerB',''],
+    ['Fri',null,'Easy ride'],['Sat',null,'Long run or ride',1],['Sun',null,'Rest']]},
+};
+
+/* ---------- state ---------- */
+const store={get(k,d){try{return localStorage.getItem('rsp.'+k)??d}catch(e){return d}},set(k,v){try{localStorage.setItem('rsp.'+k,v)}catch(e){}}};
+function loadPicks(){try{return JSON.parse(store.get('picks','{}'))||{}}catch(e){return {}}}
+const state={mode:store.get('mode','4'),day:store.get('day','lowerA'),picks:loadPicks()};
+if(!PLAN[state.mode])state.mode='4';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ICON_PAUSE='<svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx=".8"/><rect x="7" y="1.5" width="3" height="9" rx=".8"/></svg>';
+const ICON_PLAY='<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.6v8.8a.6.6 0 0 0 .9.5l7-4.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z"/></svg>';
+
+const optsOf=s=>[s.ex,...(s.alts||[])];
+function pickOf(dk,s){const v=state.picks[dk+'.'+s.ex];return optsOf(s).includes(v)?v:s.ex}
+function setPick(dk,s,id){state.picks[dk+'.'+s.ex]=id;store.set('picks',JSON.stringify(state.picks))}
+const setsOf=rx=>{const m=/^(\d+)(?:–(\d+))?/.exec(rx);return m?+(m[2]||m[1]):0};
+const slotsOf=dk=>DAYS[dk].parts.flatMap((p,pi)=>p.slots.map(s=>({p,pi,s})));
+const partLabel=p=>p.label||p.r.map(r=>REG[r].n).join(' & ');
+function dayLoad(dk){
+  const dir={},ind={};
+  for(const {p,s} of slotsOf(dk)){const n=setsOf(s.rx);
+    for(const r of p.r)dir[r]=(dir[r]||0)+n;
+    for(const r of EX[pickOf(dk,s)].h)if(!p.r.includes(r))ind[r]=(ind[r]||0)+n}
+  return {dir,ind};
+}
+function dayLevels(dk){
+  const lv={};
+  for(const it of WARM[DAYS[dk].warm])for(const r of EX[it.ex].h)lv[r]=1;
+  for(const {s} of slotsOf(dk))for(const r of EX[pickOf(dk,s)].h)lv[r]=1;
+  for(const p of DAYS[dk].parts)for(const r of p.r)lv[r]=2;
+  return lv;
+}
+
+/* ---------- animation loop ---------- */
+let anims=[],active=new Set(),raf=0;
+const io=new IntersectionObserver(es=>{for(const e of es){const a=e.target._anim;if(!a)continue;
+  if(e.isIntersecting){active.add(a);drawAnim(a,performance.now())}else active.delete(a)}kick()},{rootMargin:'80px'});
+function kick(){if(!raf)raf=requestAnimationFrame(tick)}
+function tick(now){raf=0;let any=false;for(const a of active){if(!a.paused){drawAnim(a,now);any=true}}if(any)raf=requestAnimationFrame(tick)}
+function redrawAll(){const now=performance.now();for(const a of active)drawAnim(a,now)}
+function clearAnims(){for(const a of anims)io.unobserve(a.cv);anims=[];active.clear()}
+
+/* ---------- body map ---------- */
+const MIR='matrix(-1 0 0 1 100 0)';
+const E=(cx,cy,rx,ry,rot)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"${rot?` transform="rotate(${rot} ${cx} ${cy})"`:''}/>`;
+const P=d=>`<path d="${d}"/>`;
+const pair=sh=>sh+`<g transform="${MIR}">${sh}</g>`;
+const SHAPES={
+  front:[
+    ['chest',pair(P('M34.5 35Q42 31.5 49.2 33.5V51Q41 55 35 50.5Z'))],
+    ['sidedelt',pair(E(25.5,39,3.8,7.5,10))],
+    ['frontdelt',pair(E(31,37,5,6.5))],
+    ['biceps',pair(E(25.2,53,4.2,11,8))],
+    ['forearms',pair(E(20.6,86,3.6,12.5,8))],
+    ['core','<rect x="39.5" y="55" width="21" height="37" rx="7"/>'],
+    ['quads',pair(E(40.8,128,6.8,22))],
+    ['adductors',pair(E(47,117,2.6,12))],
+    ['shins',pair(E(39.4,181,3.2,17))],
+    ['feet',pair(E(40,209.5,5.8,3.4))],
+  ],
+  back:[
+    ['lats',pair(P('M37 43L48.5 61L47.5 80Q39.5 74 34.5 58Z'))],
+    ['lowback','<rect x="43.5" y="64" width="13" height="25" rx="5"/>'],
+    ['midback',P('M50 26.5L63 33L57.5 54L50 62L42.5 54L37 33Z')],
+    ['sidedelt',pair(E(25.5,39,3.8,7.5,10))],
+    ['reardelt',pair(E(30,37.5,4.8,6))],
+    ['triceps',pair(E(25.2,53,4.2,11,8))],
+    ['forearms',pair(E(20.6,86,3.6,12.5,8))],
+    ['hipside',pair(E(35.8,98,3.6,7))],
+    ['glutes',pair(E(43.4,105,6.8,9.5))],
+    ['hamstrings',pair(E(41,138,6.6,19))],
+    ['calves',pair(E(40.6,177,5.2,15))],
+    ['feet',pair(E(40.3,208,3.6,3.2))],
+  ],
+};
+const SIL=`<g class="sil"><circle cx="50" cy="12" r="9.5"/><rect x="45" y="19" width="10" height="13" rx="3"/>
+<path d="M30 31Q50 26 70 31L67 58Q64 78 67 96L66 108Q50 112 34 108L33 96Q36 78 33 58Z"/>
+${pair('<line x1="28" y1="34" x2="23" y2="68" stroke-width="10.5"/><line x1="23" y1="68" x2="18.5" y2="104" stroke-width="8.5"/><circle cx="18" cy="110" r="4.2"/><line x1="41" y1="100" x2="41" y2="158" stroke-width="16"/><line x1="41" y1="158" x2="40.5" y2="204" stroke-width="11"/><ellipse cx="40" cy="209" rx="6.4" ry="3.8"/>')}</g>`;
+function buildMap(){
+  const fig=(v,x)=>`<g transform="translate(${x} 0)">${SIL}${SHAPES[v].map(([r,sh])=>`<g class="rg" data-r="${r}"><title>${REG[r].n}</title>${sh}</g>`).join('')}
+    <text class="maplbl" x="50" y="229" text-anchor="middle">${v==='front'?'FRONT':'BACK'}</text></g>`;
+  $('#bodymap').innerHTML=`<svg viewBox="0 0 224 234" role="img" aria-label="Body map of the muscles this session trains">${fig('front',4)}${fig('back',120)}</svg>`;
+  $('#bodymap').addEventListener('click',e=>{const g=e.target.closest('.rg');if(g&&g.dataset.lv!=='0')goRegion(g.dataset.r)});
+}
+function renderMap(){
+  const dk=state.day,lv=dayLevels(dk);
+  document.querySelectorAll('#bodymap .rg').forEach(g=>g.dataset.lv=lv[g.dataset.r]||0);
+  const main=[...new Set(DAYS[dk].parts.flatMap(p=>p.r))];
+  const also=GROUPS.flatMap(g=>g[1]).filter(r=>lv[r]===1);
+  $('#maplist').innerHTML=`<span class="eyebrow">Main targets · tap to jump</span>
+    <div class="rchips">${main.map(r=>`<button type="button" class="rchip" data-r="${r}">${REG[r].n}</button>`).join('')}</div>
+    ${also.length?`<span class="eyebrow">Also worked</span><p class="alsol">${also.map(r=>REG[r].n).join(' · ')}</p>`:''}
+    <div class="maplegend"><span><i class="sw l2"></i>Main target</span><span><i class="sw l1"></i>Also worked (incl. warm-up)</span><span><i class="sw l0"></i>Not today</span></div>`;
+}
+function hlMap(rs,on){document.querySelectorAll('#bodymap .rg').forEach(g=>{if(rs.includes(g.dataset.r))g.classList.toggle('hl',on)})}
+function goRegion(r){
+  const dk=state.day,d=DAYS[dk];
+  let pi=d.parts.findIndex(p=>p.r.includes(r));
+  if(pi<0){const hit=slotsOf(dk).find(({s})=>EX[pickOf(dk,s)].h.includes(r));if(hit)pi=hit.pi}
+  const el=pi>=0?document.getElementById('part-'+pi):$('#warmblock');
+  if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+}
+
+/* ---------- UI ---------- */
+const $=s=>document.querySelector(s);
+function plateStyle(c){return `--pc:var(--p-${c})`}
+function renderLegend(){
+  $('#legend').innerHTML='<span>Plate colours:</span>'+Object.entries(CATS).map(([k,v])=>`<span><i class="plate" style="${plateStyle(k)}"></i>${v}</span>`).join('');
+}
+function renderMode(){
+  for(const b of document.querySelectorAll('.seg button'))b.setAttribute('aria-pressed',String(b.dataset.mode===state.mode));
+}
+function renderWeek(){
+  const P=PLAN[state.mode];
+  $('#week').innerHTML=P.week.map(([dn,dk,cardio,hard])=>{
+    const d=dk&&DAYS[dk];
+    const gym=d?`<button type="button" class="gym" data-day="${dk}" aria-current="${dk===state.day}">${d.name}<small>${d.sub}</small></button>`:'';
+    return `<div class="dcell${!d&&!cardio?' rest':''}"><span class="dn">${dn}</span>${gym}${cardio?`<span class="cardio${hard?' hard':''}">${cardio}</span>`:''}</div>`;
+  }).join('');
+}
+function renderTabs(){
+  const P=PLAN[state.mode];
+  $('#tabs').innerHTML=P.days.map((k,i)=>`<button type="button" role="tab" data-day="${k}" aria-selected="${k===state.day}"><small>Day ${i+1}</small><b>${DAYS[k].name}</b></button>`).join('');
+}
+/* ctx = {dk,p} for main-work cards; absent for warm-up cards */
+function card(it,i,small,ctx){
+  const art=document.createElement('article');art.className='card'+(small?' sm':'');
+  const opts=ctx?optsOf(it):[it.ex];
+  art.innerHTML=`<div class="stage"><canvas role="img"></canvas><button class="pp" type="button"></button></div>
+    <div class="cb">
+      <div class="hd"><span class="num">${String(i+1).padStart(2,'0')}</span><h3></h3>${it.opt?'<span class="opt">Optional</span>':''}</div>
+      <div class="meta"><span class="rx">${it.rx}</span><span class="tag"><i class="plate"></i><span class="tl"></span></span></div>
+      ${it.note?`<p class="note">${it.note}</p>`:''}
+      ${opts.length>1?'':'<p class="focus"><span class="k">Focus</span><span class="fo"></span></p>'}
+      <p class="cue"></p>
+      ${ctx?'<p class="hits"></p>':''}
+      ${opts.length>1?`<div class="alts" role="group" aria-label="Exercise options"><span class="k">Options · what each one focuses on</span>${opts.map(id=>`<button type="button" class="alt" data-id="${id}"><b>${EX[id].n}${id===it.ex?'<em>Default</em>':''}</b><span>${EX[id].fo}</span></button>`).join('')}</div>`:''}
+    </div>`;
+  const cv=art.querySelector('canvas'),pp=art.querySelector('.pp');
+  const a={cv,ex:null,t0:performance.now(),paused:reduce,tp:0};
+  cv._anim=a;anims.push(a);
+  const setPP=()=>{pp.innerHTML=a.paused?ICON_PLAY:ICON_PAUSE;pp.setAttribute('aria-label',a.paused?'Play animation':'Pause animation')};
+  const toggle=()=>{const now=performance.now();
+    if(a.paused){a.paused=false;a.t0=now-a.tp*1000}else{a.paused=true;a.tp=(now-a.t0)/1000}
+    setPP();kick();drawAnim(a,now)};
+  const set=id=>{
+    const ex=prep(EX[id]);a.ex=ex;a.t0=performance.now();if(a.paused)a.tp=ex._still;
+    art.querySelector('h3').textContent=ex.n;
+    art.querySelector('.cue').textContent=ex.cue;
+    art.querySelector('.tl').textContent=CATS[ex.c];
+    art.querySelector('.plate').setAttribute('style',plateStyle(ex.c));
+    const fo=art.querySelector('.fo');if(fo)fo.textContent=ex.fo;
+    const hits=art.querySelector('.hits');
+    if(hits){const o=ex.h.filter(r=>!ctx.p.r.includes(r)).map(r=>REG[r].n);
+      hits.hidden=!o.length;hits.innerHTML=o.length?`<span class="k">Also works</span>${o.join(' · ')}`:''}
+    cv.setAttribute('aria-label','Animation of '+ex.n);
+    art.querySelectorAll('.alt').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===id)));
+    if(active.has(a))drawAnim(a,performance.now());
+  };
+  set(ctx?pickOf(ctx.dk,it):it.ex);setPP();
+  cv.addEventListener('click',toggle);pp.addEventListener('click',toggle);
+  art.querySelectorAll('.alt').forEach(b=>b.addEventListener('click',()=>{set(b.dataset.id);setPick(ctx.dk,it,b.dataset.id);onSwap()}));
+  io.observe(cv);
+  return art;
+}
+function renderParts(){
+  const dk=state.day,d=DAYS[dk];let num=0;
+  $('#parts').replaceChildren(...d.parts.map((p,pi)=>{
+    const sec=document.createElement('section');sec.className='part';sec.id='part-'+pi;sec.dataset.pi=pi;
+    sec.innerHTML=`<div class="parthead">${p.label?`<span class="eyebrow">${p.r.map(r=>REG[r].n).join(' · ')}</span>`:''}<h3>${partLabel(p)}</h3>
+      <p class="why">${p.why||REG[p.r[0]].why}</p><p class="alsoby"></p></div><div class="grid"></div>`;
+    sec.querySelector('.grid').replaceChildren(...p.slots.map(s=>card(s,num++,false,{dk,p})));
+    sec.addEventListener('mouseenter',()=>hlMap(p.r,true));
+    sec.addEventListener('mouseleave',()=>hlMap(p.r,false));
+    return sec;
+  }));
+  const n=slotsOf(dk).length;
+  $('#mainmeta').textContent=`${n} exercises · ${d.parts.length} body areas · tap an option to swap`;
+}
+function renderAlsoBy(){
+  const dk=state.day,d=DAYS[dk];
+  document.querySelectorAll('#parts .part').forEach(sec=>{
+    const pi=+sec.dataset.pi,p=d.parts[pi],names=[];
+    d.parts.forEach((q,qi)=>{if(qi!==pi)q.slots.forEach(s=>{const ex=EX[pickOf(dk,s)];
+      if(ex.h.some(r=>p.r.includes(r))&&!names.includes(ex.n))names.push(ex.n)})});
+    const el=sec.querySelector('.alsoby');el.hidden=!names.length;
+    el.innerHTML=names.length?`<span class="k">Also trained today by</span>${names.join(' · ')}`:'';
+  });
+}
+function renderMatrix(){
+  const days=PLAN[state.mode].days,loads=days.map(dayLoad);
+  const lvl=(n,t)=>!n?0:n<t[0]?1:n<t[1]?2:3;
+  const cell=(d,i,t,cls)=>`<td class="${cls}" data-lv="${lvl(d,t)}">${d?`<b>${d}</b>`:''}${i?`<small>+${i}</small>`:''}${!d&&!i?'<span class="z">–</span>':''}</td>`;
+  let h=`<thead><tr><th scope="col" style="text-align:left">Body part</th>${days.map(k=>`<th scope="col"${k===state.day?' class="cur"':''}>${DAYS[k].name}</th>`).join('')}<th scope="col" class="wk">Week</th></tr></thead><tbody>`;
+  for(const [g,rs] of GROUPS){
+    h+=`<tr class="grp"><th colspan="${days.length+2}" scope="colgroup">${g}</th></tr>`;
+    for(const r of rs){let D=0,I=0;
+      const tds=loads.map((L,j)=>{const d=L.dir[r]||0,i=L.ind[r]||0;D+=d;I+=i;return cell(d,i,[4,7],days[j]===state.day?'cur':'')}).join('');
+      h+=`<tr><th scope="row">${REG[r].n}</th>${tds}${cell(D,I,[6,12],'wk')}</tr>`}
+  }
+  $('#cov').innerHTML=h+'</tbody>';
+}
+function onSwap(){renderMap();renderAlsoBy();renderMatrix()}
+function renderDay(){
+  clearAnims();
+  const d=DAYS[state.day];
+  $('#dayhead').innerHTML=`<span class="eyebrow">${d.sub}</span><h2>${d.name}</h2><p>${d.focus}</p>`;
+  $('#warm').replaceChildren(...WARM[d.warm].map((it,i)=>card(it,i,true)));
+  renderParts();onSwap();
+}
+function renderAll(){
+  if(!PLAN[state.mode].days.includes(state.day))state.day=PLAN[state.mode].days[0];
+  renderMode();renderWeek();renderTabs();renderDay();
+}
+function pickDay(k,scroll){
+  state.day=k;store.set('day',k);
+  renderWeek();renderTabs();renderDay();
+  if(scroll){const t=$('#tabs');window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-4,behavior:reduce?'auto':'smooth'})}
+}
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  state.mode=b.dataset.mode;store.set('mode',state.mode);renderAll();
+}));
+$('#week').addEventListener('click',e=>{const b=e.target.closest('.gym');if(b)pickDay(b.dataset.day,true)});
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)pickDay(b.dataset.day,false)});
+$('#maplist').addEventListener('click',e=>{const b=e.target.closest('.rchip');if(b)goRegion(b.dataset.r)});
+
+readColors();
+const onTheme=()=>{readColors();redrawAll()};
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',onTheme);
+new MutationObserver(onTheme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+window.addEventListener('resize',redrawAll);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(redrawAll);
+buildMap();renderLegend();renderAll();
+</script>
