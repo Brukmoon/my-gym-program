@@ -95,6 +95,45 @@ Do Lower A, Upper Full, Lower B.
 
 ---
 
+## 1 leg day weeks
+
+Upper B (back), one leg day, Upper A (front), with the runs in between.
+Alternate the leg day: Legs A one week, Legs B the next. Heavy squat and heavy deadlift never land in the same session.
+
+**Legs A – squat week**
+| Exercise | Sets x reps | Notes |
+|---|---|---|
+| Pogo hops | 2 x 20 | Plyos while fresh |
+| Bounding | 3 x 20 m | |
+| Weighted barbell squat | 4 x 4–6 | Main lift |
+| Romanian deadlift | 3 x 6–8 | Moderate weight; the heavy hinge is in Legs B |
+| Nordic curl | 3 x 3–6 | |
+| Bulgarian split squat | 2 x 8/leg | |
+
+**Legs B – deadlift week**
+| Exercise | Sets x reps | Notes |
+|---|---|---|
+| Box jumps | 4 x 3 | Plyos while fresh, full rest |
+| Single-leg hops | 3 x 5/leg | |
+| Deadlift | 3 x 3–5 | Main lift |
+| Bulgarian split squat | 3 x 6–10/leg | |
+| Nordic curl | 3 x 3–6 | |
+| Step-ups or single-leg RDL | 3 x 8/leg | |
+
+Calves, tibialis, side hips and Copenhagen planks are not in these sessions. Cover them in the warm-ups or as 10-minute finishers on the upper days, so the weekly checklist still gets ticked.
+
+| Day | Gym | Cardio |
+|---|---|---|
+| Mon | Upper B | – |
+| Tue | Legs A or B (4–6 h after the run) | **Intervals** |
+| Wed | Upper A | Easy ride or rest |
+| Thu | – | Easy run + strides |
+| Fri | – | Easy ride or rest |
+| Sat | – | Rest |
+| Sun | – | **Long run** |
+
+---
+
 ## Example week (4 days + running/cycling)
 
 | Day | Gym | Cardio |

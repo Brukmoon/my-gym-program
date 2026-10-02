@@ -75,6 +75,8 @@ button:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline
 .dcell .cardio{font-size:13.5px;line-height:1.3;color:var(--muted)}
 .dcell .cardio.hard{color:var(--hard);font-weight:600}
 .dcell.rest .cardio{color:var(--muted)}
+.dcell .alt{font:500 11px/1 "IBM Plex Mono",monospace;color:var(--muted);text-align:center;margin:-4px 0}
+.seg{flex-wrap:wrap;max-width:100%}
 .rule48{margin:0;font-size:13.5px;color:var(--muted)}
 
 .tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto}
@@ -193,6 +195,7 @@ button:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline
       <div class="seg" role="group" aria-label="Gym days per week">
         <button type="button" id="m3" data-mode="3">3 days<span>A · Full · B</span></button>
         <button type="button" id="m4" data-mode="4">4 days<span>A · B · A · B</span></button>
+        <button type="button" id="mlegs" data-mode="legs">1 leg day<span>Back · Legs · Front</span></button>
       </div>
     </div>
   </header>
@@ -853,6 +856,37 @@ const DAYS={
       {r:['core'],slots:[
         {ex:'deadbug',rx:'2–3 × 8 / side',note:'Plank option: 2–3 × 30–45 s.',alts:['plank','crunch']}]},
     ]},
+  legA:{name:'Legs A',sub:'Squat week',warm:'lower',
+    focus:'The only leg day of the week, so it covers everything: plyos while fresh, the heavy squat, a moderate hinge, Nordics and one-leg work. Alternate with Legs B.',
+    parts:[
+      {r:['feet'],slots:[
+        {ex:'pogo',rx:'2 × 20',note:'Quick, stiff ankles. Legs fresh.',alts:['slhop']},
+        {ex:'bound',rx:'3 × 20 m',alts:['skip']}]},
+      {r:['quads'],slots:[
+        {ex:'squat',rx:'4 × 4–6',note:'Main lift.',alts:['bss','pistol']}]},
+      {r:['hamstrings','glutes','lowback'],label:'Hinge · back of the body',slots:[
+        {ex:'rdl',rx:'3 × 6–8',note:'Moderate weight. The heavy hinge is in Legs B.',alts:['slrdl']}]},
+      {r:['hamstrings'],slots:[
+        {ex:'nordic',rx:'3 × 3–6',note:'Slow lowering. Use a band or push-off to start.',alts:['slidercurl']}]},
+      {r:['quads','glutes'],label:'Quads & glutes · one leg',slots:[
+        {ex:'bss',rx:'2 × 8 / leg',alts:['stepup','lunge']}]},
+    ]},
+  legB:{name:'Legs B',sub:'Deadlift week',warm:'lower',
+    focus:'The only leg day of the week, so it covers everything: jumps while fresh, the heavy deadlift, split squats, Nordics and one-leg work. Alternate with Legs A.',
+    parts:[
+      {r:['glutes','quads','calves'],label:'Whole-leg power',why:'Jumps teach the legs to produce force fast. Do them first, while fresh.',slots:[
+        {ex:'boxjump',rx:'4 × 3',note:'Full rest, max quality.',alts:['broadjump']}]},
+      {r:['feet'],label:'Feet & ankles · one leg',slots:[
+        {ex:'slhop',rx:'3 × 5 / leg',alts:['pogo','bound']}]},
+      {r:['hamstrings','glutes','lowback'],label:'Hinge · back of the body',why:'Hamstrings, glutes and lower back working together: the heaviest thing you lift all week.',slots:[
+        {ex:'deadlift',rx:'3 × 3–5',note:'Main lift.',alts:['rdl']}]},
+      {r:['quads'],slots:[
+        {ex:'bss',rx:'3 × 6–10 / leg',note:'Bodyweight first, then dumbbells.',alts:['stepup','pistol']}]},
+      {r:['hamstrings'],slots:[
+        {ex:'nordic',rx:'3 × 3–6',note:'Slow lowering. Use a band or push-off to start.',alts:['slidercurl']}]},
+      {r:['quads','glutes'],label:'Quads & glutes · one leg',slots:[
+        {ex:'stepup',rx:'3 × 8 / leg',note:'Or single-leg RDL 3 × 8 / leg.',alts:['slrdl','pistol']}]},
+    ]},
   upperFull:{name:'Upper Full',sub:'Push + pull',warm:'upper',
     focus:'For 3-day weeks: the key push and pull lifts in one session, fewer sets each.',
     parts:[
@@ -872,6 +906,9 @@ const PLAN={
   '3':{days:['lowerA','upperFull','lowerB'],week:[
     ['Mon','lowerA','Easy run'],['Tue','upperFull','Easy ride'],['Wed',null,'Hard run',1],['Thu','lowerB',''],
     ['Fri',null,'Easy ride'],['Sat',null,'Long run or ride',1],['Sun',null,'Rest']]},
+  'legs':{days:['upperB','legA','legB','upperA'],w:{legA:.5,legB:.5},week:[
+    ['Mon','upperB',''],['Tue',['legA','legB'],'Intervals first, legs 4–6 h later',1],['Wed','upperA','Easy ride or rest'],
+    ['Thu',null,'Easy run + strides'],['Fri',null,'Easy ride or rest'],['Sat',null,'Rest'],['Sun',null,'Long run',1]]},
 };
 
 /* ---------- state ---------- */
@@ -985,10 +1022,10 @@ function renderMode(){
 }
 function renderWeek(){
   const P=PLAN[state.mode];
-  $('#week').innerHTML=P.week.map(([dn,dk,cardio,hard])=>{
-    const d=dk&&DAYS[dk];
-    const gym=d?`<button type="button" class="gym" data-day="${dk}" aria-current="${dk===state.day}">${d.name}<small>${d.sub}</small></button>`:'';
-    return `<div class="dcell${!d&&!cardio?' rest':''}"><span class="dn">${dn}</span>${gym}${cardio?`<span class="cardio${hard?' hard':''}">${cardio}</span>`:''}</div>`;
+  $('#week').innerHTML=P.week.map(([dn,dks,cardio,hard])=>{
+    const ks=dks?[].concat(dks):[];  // an array = alternate weeks (A / B)
+    const gym=ks.map(dk=>`<button type="button" class="gym" data-day="${dk}" aria-current="${dk===state.day}">${DAYS[dk].name}<small>${DAYS[dk].sub}</small></button>`).join(ks.length>1?'<span class="alt">or</span>':'');
+    return `<div class="dcell${!ks.length&&!cardio?' rest':''}"><span class="dn">${dn}</span>${gym}${cardio?`<span class="cardio${hard?' hard':''}">${cardio}</span>`:''}</div>`;
   }).join('');
 }
 function renderTabs(){
@@ -1061,15 +1098,15 @@ function renderAlsoBy(){
   });
 }
 function renderMatrix(){
-  const days=PLAN[state.mode].days,loads=days.map(dayLoad);
+  const days=PLAN[state.mode].days,loads=days.map(dayLoad),wt=PLAN[state.mode].w||{};  // w: alternate-week days count half
   const lvl=(n,t)=>!n?0:n<t[0]?1:n<t[1]?2:3;
   const cell=(d,i,t,cls)=>`<td class="${cls}" data-lv="${lvl(d,t)}">${d?`<b>${d}</b>`:''}${i?`<small>+${i}</small>`:''}${!d&&!i?'<span class="z">–</span>':''}</td>`;
-  let h=`<thead><tr><th scope="col" style="text-align:left">Body part</th>${days.map(k=>`<th scope="col"${k===state.day?' class="cur"':''}>${DAYS[k].name}</th>`).join('')}<th scope="col" class="wk">Week</th></tr></thead><tbody>`;
+  let h=`<thead><tr><th scope="col" style="text-align:left">Body part</th>${days.map(k=>`<th scope="col"${k===state.day?' class="cur"':''}>${DAYS[k].name}</th>`).join('')}<th scope="col" class="wk">Week${Object.keys(wt).length?'<small> A/B averaged</small>':''}</th></tr></thead><tbody>`;
   for(const [g,rs] of GROUPS){
     h+=`<tr class="grp"><th colspan="${days.length+2}" scope="colgroup">${g}</th></tr>`;
     for(const r of rs){let D=0,I=0;
-      const tds=loads.map((L,j)=>{const d=L.dir[r]||0,i=L.ind[r]||0;D+=d;I+=i;return cell(d,i,[4,7],days[j]===state.day?'cur':'')}).join('');
-      h+=`<tr><th scope="row">${REG[r].n}</th>${tds}${cell(D,I,[6,12],'wk')}</tr>`}
+      const tds=loads.map((L,j)=>{const d=L.dir[r]||0,i=L.ind[r]||0,k=wt[days[j]]??1;D+=d*k;I+=i*k;return cell(d,i,[4,7],days[j]===state.day?'cur':'')}).join('');
+      h+=`<tr><th scope="row">${REG[r].n}</th>${tds}${cell(Math.round(D),Math.round(I),[6,12],'wk')}</tr>`}
   }
   $('#cov').innerHTML=h+'</tbody>';
 }
